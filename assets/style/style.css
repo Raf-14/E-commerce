@@ -1,0 +1,178 @@
+/* Add CSS styles here */
+* {
+    margin: 0;
+    padding: 0;
+}        
+
+        
+        /* style for register */
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* styling for form labels */
+    label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    }
+    
+    /* styling for form input fields */
+    input[type="text"],
+    input[type="email"],
+    input[type="password"], 
+    input[type="tel"], 
+    input[type="date"], select {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 350px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    }
+    
+    /* styling for form group elements */
+    .form-group {
+    display: flex;
+    flex-direction: column;
+    }
+    
+    /* styling for the submit button */
+    button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    }
+    button:hover{
+        background-color: #45a049;
+        transition: background-color 0.3s ease;
+
+    }
+    
+    /* styling for the form */
+    .form-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+    }
+
+    a {
+        color:rgb(12, 12, 12);
+        text-decoration: none;
+    }
+    
+    /* styling for error messages */
+    .error {
+    color: red;
+    font-size: 14px;
+    }
+    
+    /* styling for success message */
+    .success {
+    color: green;
+    font-size: 14px;
+    }
+        /* Style the footer */
+        footer {
+        text-align: center;
+        padding: 10px;
+        background-color: #f1f1f1;
+        color: #555;
+    }
+            
+
+ /* Login style */
+    
+    /* Style the form */
+    .log_in form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+    
+    .log_in  label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+     /* styling for form group elements */
+    .log_in .form-group {
+            display: flex;
+            flex-direction: column;
+            }
+    
+    .log_in input[type="text"],
+       .log_in input[type="password"] {
+            width: 350px;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            margin-bottom: 15px;
+        }
+    
+    .log_in button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    
+   .log_in a {
+        color:rgb(12, 12, 12);
+        text-decoration: none;
+    }
+    
+    
+    /* Style the responsive layout */
+    @media screen and (max-width: 600px) {
+        form {
+            width: 100%;
+        }
+    }
+    
+    /* Add CSS styles for loading spinner */
+    .loading {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(255, 255, 255, 0.8);
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+    }
+    
+    /* Style the loading spinner */
+   .lds-spinner {
+     display: inline-block;
+     width: 64px;
+     height: 64px;
+     margin: 8px;
+     position: relative;
+     transform: translateZ(0);
+     animation: lds-spinner 1.2s infinite linear;
+   }
+   @keyframes lds-spinner {
+     0% { transform: rotate(0deg); }
+     100% { transform: rotate(360deg); }
+   }
+
+        
+    

@@ -11,6 +11,7 @@ require_once '../config/database.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catalogue de Produits</title>
+    <link rel="icon" type="image/png" href="icon.png">
     <link rel="stylesheet" href="../assets/styles.css">
 </head>
 <body>
@@ -32,7 +33,7 @@ require_once '../config/database.php';
         <a href="#">Plan du site</a>
         <a href="#">Retour en haut</a>
         <a href="#">Signaler un problème</a>
-        
+
     </footer>
     <script src="../assets/script.js"></script>
 </body>
