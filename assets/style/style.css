@@ -1,10 +1,167 @@
-/* Add CSS styles here */
+/* Base Reset */
 * {
     margin: 0;
     padding: 0;
-}        
+    box-sizing: border-box;
+}
 
-        
+/* Body */
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff;
+    border-bottom: 2px solid #f1f1f1;
+}
+
+header .logo img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+header .navbar ul {
+    display: flex;
+    list-style: none;
+}
+
+header.navbar ul li:hover {
+    background-color: #f1f1f1;
+}
+
+header.navbar ul li a:hover {
+    color: #4CAF50;
+}
+
+header.navbar ul li.active {
+    background-color: #ddd;
+    color: #000;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+header .navbar ul li {
+    margin: 0 15px;
+}
+
+header .navbar ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+}
+
+header .menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+header .menu-toggle span {
+    width: 25px;
+    height: 3px;
+    margin: 4px 0;
+    background-color: #333;
+}
+
+
+
+
+/* Hero Section */
+.hero {
+    background-image: url('../images/cover.jpeg');
+    background-size: cover;
+    background-position: center;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero h1 {
+    color: white;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.hero .cta-btn {
+    background-color: #ff6347;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 5px;
+}
+
+.hero .cta-btn:hover {
+    background-color: #e53e35;
+}
+
+/* Sections */
+section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+/* Featured Products */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.product-item {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-item img {
+    width: 150px;
+    height: auto;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.product-item button {
+    background-color: #ff6347;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.product-item button:hover {
+    background-color: #e53e35;
+}
+
+/* Testimonials */
+.testimonials {
+    background-color: #f1f1f1;
+    padding: 40px 20px;
+}
+
+.testimonial-item {
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.testimonial-item p {
+    font-weight: bold;
+}
+   
         /* style for register */
 form {
     display: flex;
@@ -175,4 +332,78 @@ form {
    }
 
         
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+footer .footer-links {
+    margin-bottom: 10px;
+}
+
+footer .footer-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+footer .footer-links a:hover {
+    text-decoration: underline;
+}
+
+footer .social-icons a {
+    color: white;
+    margin: 0 10px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+      /* Affiche le menu sous forme de colonne quand il est actif */
+      header .navbar ul {
+        display: none;
+        flex-direction: column;
+        padding: 10px;
+        background-color: #fff;
+        position: absolute;
+        top: 70px;  /* Ajuste la position en fonction de la taille de ton header */
+        left: 0;
+        width: 100%;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Affiche le menu quand on active la classe 'active' */
+    header .navbar ul.active {
+        display: flex;
+    }
+
+    /* Menu burger */
+    header .menu-toggle {
+        display: flex;
+    }
+
+    /* Animation du menu burger */
+    header .menu-toggle.active span {
+        background-color: #4CAF50; /* Change la couleur des barres */
+    }
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    header .navbar ul {
+        display: none;
+    }
+
+    header .menu-toggle {
+        display: flex;
+    }
+
+    .menu-toggle.active + .navbar ul {
+        display: flex;
+        flex-direction: column;
+    }
+}
     

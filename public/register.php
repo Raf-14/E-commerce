@@ -8,7 +8,7 @@
 </head>
 <body>
     <!-- header include since includes header.php -->
-     <?php include 'header.php';?>
+     <?php include '../includes/header.php';?>
 
      <!-- success or error message divs -->
        <div id="success_message" class="success"></div>
@@ -83,7 +83,9 @@
        </div>
    
     <!-- footer include since includes footer.php -->
-     <?php include 'footer.php';?>
+     <?php include '../includes/footer.php';?>
+
+     <script src="../assets/script/app.js"></script>
 
 </body>
 </html>

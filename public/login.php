@@ -9,7 +9,7 @@
 
 <body>
     <!-- Header of page include since includes header.php -->
-     <?php include 'header.php';?>
+     <?php include '../includes/header.php';?>
      
     <!-- Log in form -->
      <form action="login.php" method="post" class="log_in">
@@ -37,6 +37,10 @@
 
      
     <!-- Footer of page include since includes footer.php -->
-     <?php include 'footer.php';?>
+     <?php include '../includes/footer.php';?>
+
+
+     <script src="../assets/js/script.js"></script> <!-- link to your JavaScript file -->
+</html>
 </body>
 </html>
