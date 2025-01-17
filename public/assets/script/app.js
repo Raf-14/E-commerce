@@ -1,17 +1,14 @@
 // JavaScript pour le menu burger
-// JavaScript pour le menu burger
-// const mobileMenu = document.getElementById('mobile-menu'); // Le bouton burger
-// const navbar = document.querySelector('.navbar ul'); // Liste de navigation
+const mobileMenu = document.getElementById('mobile-menu');
+const navbar = document.querySelector('.navbar ul');
 
 // Ajoute ou enlève la classe 'active' lors du clic sur le bouton burger
-// mobileMenu.addEventListener('click', () => {
-//     navbar.classList.toggle('active'); // Toggle la classe 'active' pour afficher ou masquer le menu
-//     mobileMenu.classList.toggle('active'); // Change l'état visuel du burger (optionnel)
-// });
+mobileMenu.addEventListener('click', () => {
+    navbar.classList.toggle('active'); 
+    mobileMenu.classList.toggle('active');
+});
 
-
-// JavaScript pour la carte interactive
-//fetch des donnée depuis le fichier json avec la methode promise
+// Données JSON
 const data = "http://localhost/E-commerce/produits.json";
 
 // Fonction pour créer une carte de produit
@@ -20,7 +17,7 @@ const createCard = (product) => {
     const card = document.createElement('div');
     card.classList.add('card');
     card.innerHTML = `
-        <img src="${product.image}" alt="${product.name}">
+        <img src="${product.image_url}" alt="${product.name}">
         <h2>${product.name}</h2>
         <p>${product.description}</p>
         <a href="#" class="btn">Voir plus</a>
@@ -61,6 +58,40 @@ const createCard = (product) => {
     const btnVoirPlus = card.querySelector('.btn');
     btnVoirPlus.addEventListener('click', () => {
         console.log('Voir plus:', product.name);
+
+        // Afficher le modal avec les détails du produit
+        const modal = document.getElementById('productModal');
+        modal.style.display = "block";
+        const productDetails = document.getElementById('product-details');
+        productDetails.innerHTML = `
+            <h5>${product.name}</h5>
+            <p>${product.description}</p>
+            <img src="${product.image_url}" alt="${product.name}">
+            <p>Prix: ${product.price} €</p>
+            <p>Stock: ${product.stock} unités</p>
+            <p>Catégorie: ${product.category_id}</p>
+            <button class="btn-primary">Commander</button>
+            <button type="button" class="btn" id="closeModal">Fermer</button>
+            <button type="button" class="btn add-to-cart">Ajouter au panier</button>
+        `;
+
+        // Gestion du bouton "Fermer"
+        const closeModalBtn = document.getElementById('closeModal');
+        closeModalBtn.addEventListener('click', () => {
+            modal.style.display = "none";
+        });
+
+        // Gestion du bouton "Commander"
+        const commanderBtn = productDetails.querySelector('.btn-primary');
+        commanderBtn.addEventListener('click', () => {
+            console.log('Commandé:', product.name);
+        });
+
+        // Gestion du bouton "Ajouter au panier"
+        const addToCartBtnModal = productDetails.querySelector('.add-to-cart');
+        addToCartBtnModal.addEventListener('click', () => {
+            console.log('Ajouté au panier:', product.name);
+        });
     });
 };
 
@@ -84,7 +115,7 @@ const fetchData = new Promise((resolve, reject) => {
         reject("Le fichier json n'existe pas");
     }
 }).then(result => {
-    console.log("Données reçues :", result); // Traite les données ici
+    console.log("Données reçues :", result);
     result.forEach(product => {
         createCard(product); // Crée une carte pour chaque produit
     });

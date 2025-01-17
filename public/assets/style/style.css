@@ -128,7 +128,7 @@ section {
 
 .product-item img {
     width: 150px;
-    height: auto;
+    height: 200px;
     border-radius: 5px;
     object-fit: cover;
 }
@@ -146,6 +146,8 @@ section {
 .product-item button:hover {
     background-color: #e53e35;
 }
+
+
 
 /* Testimonials */
 .testimonials {
@@ -303,21 +305,46 @@ section {
     button[type="submit"]:hover {
         background-color: #0069d9;
     }
+
+    /* Style pour le formulaire */
         /* style for register */
-form {
-    display: flex;
-    flex-direction: column;
-    max-width: 400px;
+    
+    /* styling for the form */
+.form-container {
+    max-width: 600px;
     margin: 0 auto;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
     }
+    
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+
+    }
+
+    .form-container form .form-groupe {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+
+    }
+
     
     /* styling for form labels */
     label {
     font-weight: bold;
     margin-bottom: 5px;
+    margin-right: 10px;
     }
     
     /* styling for form input fields */
@@ -332,13 +359,6 @@ form {
     border: 1px solid #ccc;
     border-radius: 4px;
     }
-    
-    /* styling for form group elements */
-    .form-group {
-    display: flex;
-    flex-direction: column;
-    }
-    
     /* styling for the submit button */
     button {
     background-color: #4CAF50;
@@ -352,16 +372,6 @@ form {
     button:hover{
         background-color: #45a049;
         transition: background-color 0.3s ease;
-
-    }
-    
-    /* styling for the form */
-    .form-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
     }
 
@@ -382,23 +392,30 @@ form {
     font-size: 14px;
     }
         /* Style the footer */
-        footer {
-        text-align: center;
-        padding: 10px;
-        background-color: #f1f1f1;
-        color: #555;
-    }
+    footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #f1f1f1;
+    color: #555;
+}
             
 
  /* Login style */
     
     /* Style the form */
-    .log_in form {
+    
+     .log_in {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             max-width: 400px;
             margin: 0 auto;
             padding: 20px;
             border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+            margin-bottom: 40vh;  
+            margin-top: 20px; 
         }
     
     .log_in  label {
@@ -421,18 +438,15 @@ form {
             margin-bottom: 15px;
         }
     
-    .log_in button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-    
    .log_in a {
         color:rgb(12, 12, 12);
         text-decoration: none;
+    }
+
+    .log_in p .forgot {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #d81515;
     }
     
     
@@ -473,6 +487,9 @@ footer {
     color: white;
     padding: 20px 0;
     text-align: center;
+    font-size: 14px;
+    overflow: hidden;
+    width: 100%;  
 }
 
 footer .footer-links {
@@ -503,9 +520,59 @@ footer .social-icons a {
 
     /* Style the responsive layout */
     @media screen and (max-width: 600px) {
-        form {
+           /* styling for the form */
+.form-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+    }
+    
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+
+    }
+
+    .form-container form .form-groupe {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+
+    }
+
+    
+    /* styling for form labels */
+    label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-right: 10px;
+    }
+    
+    /* styling for form input fields */
+    input[type="text"],
+    input[type="email"],
+    input[type="password"], 
+    input[type="tel"], 
+    input[type="date"], select {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    }
+        /* form {
             width: 100%;
-        }
+        } */
     }
     
 

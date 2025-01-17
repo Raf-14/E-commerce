@@ -11,9 +11,77 @@ require_once '../config/database.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-commerce Alimentaire</title>
-    <link rel="icon" type="image/png" href="../assets/images/logo.jpeg">
-    <link rel="stylesheet" href="../assets/style/style.css">
+    <link rel="icon" type="image/png" href="./assets/images/logo.jpeg">
+    <link rel="stylesheet" href="./assets/style/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Modal Styles */
+.modal {
+    display: none; /* Cacher par défaut */
+    position: fixed; /* Rester en place lors du défilement */
+    z-index: 1; /* S'assurer que le modal est au-dessus du contenu */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Activer le défilement si le contenu dépasse */
+    background-color: rgba(0, 0, 0, 0.4); /* Fond sombre semi-transparent */
+}
+
+ /**Modal header*/
+ .modal-header {
+    padding: 10px 16px;
+    background-color: #f4f4f4;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal-header button {
+    color: #111;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    background-color: red;
+    width: 50px;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    border: none;
+}
+
+.modal-header button:hover {
+    background-color: #c9302c;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Ajuster la taille du modal */
+    max-width: 600px; /* Largeur maximale */
+    border-radius: 8px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+    </style>
 </head>
 <body>
 <!-- En-tête -->
@@ -23,7 +91,7 @@ require_once '../config/database.php';
     <section class="hero">
         <div class="hero-content">
             <h1>Des produits frais, locaux et bio, livrés chez vous !</h1>
-            <a href="#" class="cta-btn">Explorer notre shop</a>
+            <a href="shop.php" class="cta-btn">Explorer notre shop</a>
         </div>
     </section>
 
@@ -39,34 +107,97 @@ require_once '../config/database.php';
         <h2>Nos produits frais de la semaine</h2>
         <div class="products-grid">
             <div class="product-item">
-                <img src="../assets/images/aliments/avocado.jpeg" alt="Fruit 1">
+                <img src="./assets/images/aliments/avocado.jpeg" alt="Fruit 1">
                 <p>Fruits de saison</p>
                 <p>€5.99</p>
                 <button>Ajouter au panier</button>
             </div>
             <div class="product-item">
-                <img src="../assets/images/fruits/banane.jpeg" alt="Fruit 2">
+                <img src="./assets/images/fruits/banane.jpeg" alt="Fruit 2">
                 <p>Légumes frais</p>
                 <p>€3.99</p>
                 <button>Ajouter au panier</button>
             </div>
             <div class="product-item">    
-                <img src="../assets/images/aliments/Chili_Peppers.jpeg" alt="Fruit 4">
-                <p>Panier bio</p>
+                <img src="./assets/images/aliments/Chili_Peppers.jpeg" alt="Fruit 4">
+                <p>Chili Peppers</p>
                 <p>€12.99</p>
                 <button>Ajouter au panier</button>
             </div>
-            <div class="product-item">
-                
-            <img src="../assets/images/produit_frais/Jus_d_Ananas_Pur.jpeg" alt="Fruit 3">
-                <p>Jus de fruits frais</p>
+            <div class="product-item">    
+            <img src="./assets/images/produit_frais/Jus_d_Ananas_Pur.jpeg" alt="Fruit 3">
+                <p>Jus d'Ananas frais</p>
                 <p>€4.49</p>
                 <button>Ajouter au panier</button>
             </div>
+            <div class="product-item">
+                <img src="./assets/images/produit_frais/Jus_de_Fraise_Pur.jpeg" alt="Fruit 5">
+                <p>Fruits de Fraise Pur</p>
+                <p>€6.99</p>
+                <button>Ajouter au panier</button>
+            </div>
+            <div class="product-item">
+                <img src="./assets/images/produit_frais/Pur_jus_de_citron.jpeg" alt="Fruit 6">
+                <p>Jus de citron</p>
+                <p>€8.99</p>
+                <button>Ajouter au panier</button>
+            </div>
+            <div class="product-item">
+                <img src="./assets/images/aliments/carotte.jpeg" alt="Fruit 7">
+                <p>Carotte</p>
+                <p>€10.99</p>
+                <button>Ajouter au panier</button>
+            </div>
+            <div class="product-item">
+                <img src="./assets/images/fruits/Melon.jpeg" alt="Fruit 8">
+                <p>Melon</p>
+                <p>€7.99</p>
+                <button>Ajouter au panier</button>
+            </div>
+
         </div>
-        <div id="product-container"></div>
-        <a href="#" class="cta-btn">Voir plus de produits</a>
+        <a href="shop.php" class="cta-btn">Voir plus de produits</a>
     </section>
+    
+    <!-- <div id="product-container" class="products-grid"></div> -->
+     <!-- Modal -->
+     <div class="modal fade" id="productModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productModalLabel">Détail du produit</h5>
+                    <button type="button" id="closeModal" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="product-details">
+                        <!-- Les informations du produit seront affichées ici -->
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+      </div>
+
+    <div class="product-container">
+    <?php
+        // Lire le fichier JSON
+        //$json = file_get_contents('../produits.json');  // Si le fichier JSON est à la racine du projet
+       // $produits = json_decode($json, true);  // Décoder le JSON en tableau associatif
+
+        // Parcourir les produits et afficher
+       // foreach ($produits as $produit) {
+         //   echo '<div>';
+         //   echo '<img src="' . htmlspecialchars($produit['image_url']) . '" alt="' . htmlspecialchars($produit['name']) . '" />';
+          //  echo '<h3>' . htmlspecialchars($produit['name']) . '</h3>';
+          //  echo '<p>' . htmlspecialchars($produit['description']) . '</p>';
+           // echo '<p>Price: ' . htmlspecialchars($produit['price']) . ' €</p>';
+           // echo '<p>Stock: ' . htmlspecialchars($produit['stock']) . '</p>';
+           // echo '</div>';
+       // }
+        ?>
+    </div>
 
     <!-- Témoignages -->
     <section class="testimonials">
@@ -93,7 +224,7 @@ require_once '../config/database.php';
      <?php include '../includes/footer.php'?>
    
 
-    <script src="../assets/script/app.js"></script>
+    <script src="./assets/script/app.js"></script>
 </body>
 </html>
 

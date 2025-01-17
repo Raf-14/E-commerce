@@ -42,10 +42,10 @@ Voir le fichier e-commerce.sql pour la configuration et l'installation de la bas
 2-Création de l'architecture du projet:
 
 ecommerce-project/
-├── assets/              # Fichiers CSS, JS, images
 ├── config/              # Fichiers de configuration (ex : base de données, paramètres)
 ├── includes/            # Fichiers PHP communs (ex : header, footer, etc.)
 ├── public/              # Fichiers accessibles au public (ex : index.php, .htaccess)
+|   ├── assets/              # Fichiers CSS, JS, images
 ├── src/                 # Code source (contrôleurs, modèles, etc.)
 ├── templates/           # Templates HTML ou fichiers view
 └── .gitignore           # Fichier pour ignorer certains fichiers/dossiers (ex : .env)

@@ -15,7 +15,7 @@
         "stock": 100,
         "category_id": 1,
         "description": "A tasty and delicious fruit with a sweet and creamy texture.",
-        "image_url": "./assets/images/fruits/bananas.jpeg"
+        "image_url": "assets/images/fruits/banane.jpeg"
     },
     {
         "id": 3,
@@ -24,7 +24,7 @@
         "stock": 75,
         "category_id": 1,
         "description": "A ripe and delicious fruit with a sweet and juicy flavor.",
-        "image_url": "./assets/images/fruits/barbadine.jpeg"
+        "image_url": "assets/images/fruits/barbadine.jpeg"
     },
     {
         "id": 4,
@@ -33,7 +33,7 @@
         "stock": 30,
         "category_id": 1,
         "description": "A sweet and fruity fruit with a tangy flavor.",
-        "image_url": "./assets/images/fruits/cerise_red.jpeg"
+        "image_url": "assets/images/fruits/cerise_red.jpeg"
     },
     {
         "id": 5,
@@ -42,7 +42,7 @@
         "stock": 80,
         "category_id": 1,
         "description": "A vibrant and delicious fruit with a fruity flavor.",
-        "image_url": "./assets/images/fruits/fraise.jpeg"
+        "image_url": "assets/images/fruits/fraise.jpeg"
     },
     {
         "id": 6,
@@ -51,7 +51,7 @@
         "stock": 120,
         "category_id": 1,
         "description": "A juicy and vibrant fruit with a tangy flavor.",
-        "image_url": "./assets/images/fruits/orange.jpeg"
+        "image_url": "assets/images/fruits/orange.jpeg"
     },
     {
         "id": 7,
@@ -60,7 +60,7 @@
         "stock": 50,
         "category_id": 1,
         "description": "A tasty and delicious fruit with a sweet and creamy texture.",
-        "image_url": "./assets/images/fruits/pomme.jpeg"
+        "image_url": "assets/images/fruits/pomme.jpeg"
     },
     {
         "id": 8,
@@ -69,7 +69,7 @@
         "stock": 60,
         "category_id": 1,
         "description": "A sweet and fruity fruit with a tangy flavor.",
-        "image_url": "./assets/images/fruits/pasteque.jpeg"
+        "image_url": "assets/images/fruits/pasteque.jpeg"
     },
     {
         "id": 9,
@@ -78,7 +78,7 @@
         "stock": 40,
         "category_id": 1,
         "description": "A delicious and juicy fruit with a sweet and creamy texture.",
-        "image_url": "./assets/images/fruits/Melon.jpeg"
+        "image_url": "assets/images/fruits/Melon.jpeg"
     },
     {
         "id": 10,
@@ -87,6 +87,6 @@
         "stock": 30,
         "category_id": 1,
         "description": "A sweet and fruity fruit with a tangy flavor.",
-        "image_url": "./assets/images/fruits/Mange.jpeg"
+        "image_url": "assets/images/fruits/Mange.jpeg"
     }
 ]

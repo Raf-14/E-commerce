@@ -11,8 +11,8 @@ require_once '../config/database.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-commerce Alimentaire</title>
-    <link rel="icon" type="image/png" href="../assets/images/logo.jpeg">
-    <link rel="stylesheet" href="../assets/style/style.css">
+    <link rel="icon" type="image/png" href="./assets/images/logo.jpeg">
+    <link rel="stylesheet" href="./assets/style/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -43,7 +43,7 @@ require_once '../config/database.php';
        // Parcourir les produits et afficher chaque card avec le nom, description, image et prix
             foreach ($products as $product) :?>
             <div class="card">
-                <img src="<?php echo $product['image']?>" alt="<?php echo $product['name']?>">
+                <img src="<?php echo $product['image_url']?>" alt="<?php echo $product['name']?>">
                 <h2><?php echo $product['name']?></h2>
                 <p><?php echo $product['description']?></p>
                 <p>Prix : <?php echo $product['price']?> €</p>
@@ -59,7 +59,7 @@ require_once '../config/database.php';
      <?php include '../includes/footer.php'?>
    
 
-    <script src="../assets/script/app.js"></script>
+    <script src="./assets/script/app.js"></script>
 </body>
 </html>
 

@@ -1,6 +1,6 @@
 <header>
         <div class="logo">
-            <img src="../assets/images/logo1.jpeg" alt="Logo" />
+            <img src="../public/assets/images/logo1.jpeg" alt="Logo" />
         </div>
         <nav class="navbar">
             <ul>
