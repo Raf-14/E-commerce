@@ -1,0 +1,92 @@
+[
+    {
+        "id": 1,
+        "name": "Ananas",
+        "price": 1.20,
+        "stock": 50,
+        "category_id": 1,
+        "description": "A versatile and nutritious fruit with a natural sweetness.",
+        "image_url": "assets/images/fruits/ananas.jpeg"
+    },
+    {
+        "id": 2,
+        "name": "Bananas",
+        "price": 0.80,
+        "stock": 100,
+        "category_id": 1,
+        "description": "A tasty and delicious fruit with a sweet and creamy texture.",
+        "image_url": "./assets/images/fruits/bananas.jpeg"
+    },
+    {
+        "id": 3,
+        "name": "Barbadine",
+        "price": 0.90,
+        "stock": 75,
+        "category_id": 1,
+        "description": "A ripe and delicious fruit with a sweet and juicy flavor.",
+        "image_url": "./assets/images/fruits/barbadine.jpeg"
+    },
+    {
+        "id": 4,
+        "name": "Cherries",
+        "price": 1.50,
+        "stock": 30,
+        "category_id": 1,
+        "description": "A sweet and fruity fruit with a tangy flavor.",
+        "image_url": "./assets/images/fruits/cerise_red.jpeg"
+    },
+    {
+        "id": 5,
+        "name": "Grapes",
+        "price": 1.00,
+        "stock": 80,
+        "category_id": 1,
+        "description": "A vibrant and delicious fruit with a fruity flavor.",
+        "image_url": "./assets/images/fruits/fraise.jpeg"
+    },
+    {
+        "id": 6,
+        "name": "Orange",
+        "price": 0.90,
+        "stock": 120,
+        "category_id": 1,
+        "description": "A juicy and vibrant fruit with a tangy flavor.",
+        "image_url": "./assets/images/fruits/orange.jpeg"
+    },
+    {
+        "id": 7,
+        "name": "Pomme",
+        "price": 1.20,
+        "stock": 50,
+        "category_id": 1,
+        "description": "A tasty and delicious fruit with a sweet and creamy texture.",
+        "image_url": "./assets/images/fruits/pomme.jpeg"
+    },
+    {
+        "id": 8,
+        "name": "Pasteque",
+        "price": 1.40,
+        "stock": 60,
+        "category_id": 1,
+        "description": "A sweet and fruity fruit with a tangy flavor.",
+        "image_url": "./assets/images/fruits/pasteque.jpeg"
+    },
+    {
+        "id": 9,
+        "name": "Melon",
+        "price": 1.30,
+        "stock": 40,
+        "category_id": 1,
+        "description": "A delicious and juicy fruit with a sweet and creamy texture.",
+        "image_url": "./assets/images/fruits/Melon.jpeg"
+    },
+    {
+        "id": 10,
+        "name": "Mangue",
+        "price": 1.60,
+        "stock": 30,
+        "category_id": 1,
+        "description": "A sweet and fruity fruit with a tangy flavor.",
+        "image_url": "./assets/images/fruits/Mange.jpeg"
+    }
+]

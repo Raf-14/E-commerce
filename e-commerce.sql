@@ -22,6 +22,13 @@ CREATE TABLE categories (
     description TEXT
 );
 
+--insertion des categorie des produits
+INSERT INTO categories (name, description) VALUES 
+('Fruits', 'Fruits frais et délicieux, parfaits pour une alimentation saine.'),
+('Légumes', 'Légumes frais et nutritifs pour vos plats.'),
+('Produits frais', 'Produits frais tels que lait, yaourt, fromage, etc.');
+
+
 -- Création de la table users (utilisateurs)
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -48,6 +55,23 @@ CREATE TABLE products (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (category_id) REFERENCES categories(id)
 );
+
+--insertion des produits selon leurs catégories
+-- Produits de la catégorie Fruits
+INSERT INTO products (name, description, price, stock, category_id, image_url) VALUES
+('Ananas', 'Ananas fraîche et sucrée', 1.99, 50, 1, 'assets/images/fruits/ananas.jpeg'),
+('Banane', 'Banane mûre et délicieuse', 1.49, 30, 1, './assets/images/fruits/bananas.jpeg');
+
+-- Produits de la catégorie Légumes
+INSERT INTO products (name, description, price, stock, category_id, image_url) VALUES
+('Carotte', 'Carotte fraîche et croquante', 0.99, 100, 2, 'images/carotte.jpg'),
+('Brocoli', 'Brocoli riche en vitamines', 2.50, 60, 2, 'images/brocoli.jpg');
+
+-- Produits de la catégorie Produits frais
+INSERT INTO products (name, description, price, stock, category_id, image_url) VALUES
+('Lait', 'Lait entier frais', 1.20, 200, 3, 'images/lait.jpg'),
+('Yaourt nature', 'Yaourt nature crémeux', 0.80, 150, 3, 'images/yaourt.jpg');
+
 
 -- Création de la table orders (commandes)
 CREATE TABLE orders (

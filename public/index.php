@@ -64,6 +64,7 @@ require_once '../config/database.php';
                 <button>Ajouter au panier</button>
             </div>
         </div>
+        <div id="product-container"></div>
         <a href="#" class="cta-btn">Voir plus de produits</a>
     </section>
 
