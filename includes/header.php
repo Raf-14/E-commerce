@@ -7,7 +7,7 @@
                 <li><a href="../public/index.php">Home</a></li>
                 <li><a href="../public/shop.php">Shop</a></li>
                 <li><a href="#">Service</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="../public/contact.php">Contact</a></li>
                 <li><a href="#">Panier</a></li>
                 <li><a href="#">Profile</a></li>
                 <li></li>
