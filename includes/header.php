@@ -9,7 +9,7 @@
                 <li><a href="#">Service</a></li>
                 <li><a href="../public/contact.php">Contact</a></li>
                 <li><a href="#">Panier</a></li>
-                <li><a href="#">Profile</a></li>
+                <li><a href="../public/profile.php">Profile</a></li>
                 <li></li>
                 <li></li>
                 <li>

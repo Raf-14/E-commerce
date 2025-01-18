@@ -1,7 +1,6 @@
 <?php
-// public/index.php
-
 require_once '../config/database.php';
+$bdd = bdd()
 
 ?>
 

@@ -35,7 +35,6 @@ CREATE TABLE users (
     username VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
-    first_name VARCHAR(100),
     last_name VARCHAR(100),
     address VARCHAR(255),
     phone VARCHAR(15),

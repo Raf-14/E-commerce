@@ -1,20 +1,27 @@
 <?php
 
-// Connect to the database
-$host = "localhost";
-$username = "root";
-$password = "";
-$db_name = "e_commerce";
+//Function to Connect to the database
 
-try {
-    // Crée une nouvelle instance PDO et se connecte à la base de données
-    $conn = new PDO("mysql:host=$host;dbname=$db_name", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connected successfully";
-} catch (PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
-    exit();
+function bdd() {
+    // Database connection details
+    $host = "localhost";
+    $username = "root";
+    $password = "";
+    $db_name = "e_commerce";
+    
+    try {
+        // Crée une nouvelle instance PDO et se connecte à la base de données
+        $conn = new PDO("mysql:host=$host;dbname=$db_name", $username, $password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        echo "Connected successfully";
+    } catch (PDOException $e) {
+        echo "Connection failed: " . $e->getMessage();
+        exit();
+    }
+    
+    return $conn;
 }
+
 
 // // Get data from JSON file
 // $json_data = file_get_contents('../produits.json');

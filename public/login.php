@@ -1,3 +1,8 @@
+<?php
+require_once '../config/database.php';
+$bdd = bdd()
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
