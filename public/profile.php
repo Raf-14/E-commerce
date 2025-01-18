@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once '../config/database.php';
 $bdd = bdd()
 
@@ -10,6 +11,7 @@ $bdd = bdd()
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil Utilisateur</title>
+    <link rel="stylesheet" href="./assets/style/style.css">
     <style>
         body {
     font-family: Arial, sans-serif;
@@ -214,7 +216,7 @@ document.querySelectorAll('.btn-edit').forEach(button => {
 });
 
     </script> <!-- Fichier JavaScript à inclure -->
-
+ <script src="./assets/script/app.js"></script>
     <!-- footer  -->
      <?php include '../includes/footer.php';?>
 </html>

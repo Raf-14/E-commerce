@@ -29,7 +29,7 @@ $bdd = bdd()
     <!-- card shop -->
      <!-- Affichage des produits disponible depuis la base de donnée -->
       <?php
-       $query = $conn->query('SELECT * FROM products');
+       $query = $bdd->query('SELECT * FROM products');
        $products = $query->fetchAll(PDO::FETCH_ASSOC);
        ?>
        <div class="container-card">
