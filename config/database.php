@@ -23,6 +23,7 @@ function bdd() {
 }
 
 
+// $bdd = bdd();
 // // Get data from JSON file
 // $json_data = file_get_contents('../produits.json');
 
@@ -30,7 +31,7 @@ function bdd() {
 // $products = json_decode($json_data, true);
 
 // // Prepare the SQL query for inserting products
-// $stmt = $conn->prepare("INSERT INTO products (name, description, price, stock, category_id, image_url) 
+// $stmt = $bdd->prepare("INSERT INTO products (name, description, price, stock, category_id, image_url) 
 //                         VALUES (:name, :description, :price, :stock, :category_id, :image_url)");
 
 // foreach ($products as $product) {

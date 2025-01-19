@@ -216,7 +216,7 @@ document.querySelectorAll('.btn-edit').forEach(button => {
 });
 
     </script> <!-- Fichier JavaScript à inclure -->
- <script src="./assets/script/app.js"></script>
+ <script type="module" src="./assets/script/app.js"></script>
     <!-- footer  -->
      <?php include '../includes/footer.php';?>
 </html>

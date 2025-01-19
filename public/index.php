@@ -13,74 +13,6 @@ $bdd = bdd()
     <link rel="icon" type="image/png" href="./assets/images/logo.jpeg">
     <link rel="stylesheet" href="./assets/style/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        /* Modal Styles */
-.modal {
-    display: none; /* Cacher par défaut */
-    position: fixed; /* Rester en place lors du défilement */
-    z-index: 1; /* S'assurer que le modal est au-dessus du contenu */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto; /* Activer le défilement si le contenu dépasse */
-    background-color: rgba(0, 0, 0, 0.4); /* Fond sombre semi-transparent */
-}
-
- /**Modal header*/
- .modal-header {
-    padding: 10px 16px;
-    background-color: #f4f4f4;
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    justify-content: space-between;
-}
-
-.modal-header button {
-    color: #111;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    background-color: red;
-    width: 50px;
-    height: 30px;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease;
-    border: none;
-}
-
-.modal-header button:hover {
-    background-color: #c9302c;
-}
-
-.modal-content {
-    background-color: white;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Ajuster la taille du modal */
-    max-width: 600px; /* Largeur maximale */
-    border-radius: 8px;
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-    </style>
 </head>
 <body>
 <!-- En-tête -->
@@ -178,7 +110,7 @@ $bdd = bdd()
             </div>
         </div>
       </div>
-
+      
     <div class="product-container">
     <?php
         // Lire le fichier JSON
@@ -224,6 +156,8 @@ $bdd = bdd()
    
 
     <script src="./assets/script/app.js"></script>
+    <script src="./assets/script/function.js"></script>
+    <script src="./assets/script/script.js"></script>
 </body>
 </html>
 

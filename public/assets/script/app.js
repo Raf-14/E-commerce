@@ -1,3 +1,4 @@
+
 // JavaScript pour le menu burger
 const mobileMenu = document.getElementById('mobile-menu');
 const navbar = document.querySelector('.navbar ul');

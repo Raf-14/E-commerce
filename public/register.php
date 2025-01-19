@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create account</title>
-    <link rel="stylesheet" type="text/css"  href="./assets/style/style.css"> <!-- link to your CSS file -->
+    <link rel="stylesheet" type="text/css"  href="./assets/style/style.css"> <!-- link to CSS file -->
 </head>
 <body>
     <!-- header include since includes header.php -->
@@ -150,7 +150,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- footer include since includes footer.php -->
      <?php include '../includes/footer.php';?>
 
-     <script src="./assets/script/app.js"></script>
+     <script type="module" src="./assets/script/app.js"></script>
 
 </body>
 </html>

@@ -15,7 +15,13 @@ session_start();  // Démarre la session pour accéder aux données de session
             
             <!-- Afficher "Profile" si l'utilisateur est connecté -->
             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true): ?>
-                <li><a href="#">Panier</a></li>
+                
+                <!-- Exemple de badge panier -->
+                <div id="cart-icon">
+                    <li><a href="../public/panier.php">Panier</a></li>
+                    <span id="cart-badge">0</span>
+                </div>
+
                 <li><a href="../public/profile.php">Profile</a></li>
                 <li><a href="../public/logout.php">Se déconnecter</a></li>
             <?php else: ?>

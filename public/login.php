@@ -83,7 +83,7 @@ $bdd = bdd()
      
    <main>
    <?php
-session_start();
+// session_start();
 
 // Traitement de la connexion
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -172,7 +172,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
      <?php include '../includes/footer.php';?>
 
 
-     <script src="./assets/js/script.js"></script> <!-- link to your JavaScript file -->
+     <script type="module" src="./assets/js/script.js"></script> <!-- link to your JavaScript file -->
 </html>
 </body>
 </html>

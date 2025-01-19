@@ -51,7 +51,7 @@ require_once '../config/database.php';
      <?php include '../includes/footer.php'?>
    
 
-    <script src="./assets/script/app.js"></script>
+    <script type="module" src="./assets/script/app.js"></script>
 </body>
 </html>
 
