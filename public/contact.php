@@ -1,8 +1,7 @@
 <?php
 // public/index.php
-
+session_start();
 require_once '../config/database.php';
-
 ?>
 
 <!DOCTYPE html>
@@ -23,35 +22,52 @@ require_once '../config/database.php';
       <main>
         <section>
             <!-- contact form -->
-             <div class="wrapper contact">
-                 <h2>Contactez-nous</h2>
-                 <form action="#" method="post">
-                     <div class="form-contact">
-                         <label for="name">Nom:</label>
-                         <input type="text" id="name" name="name" required>
-                     </div>
-                     <div class="form-contact">
-                         <label for="email">Email:</label>
-                         <input type="email" id="email" name="email" required>
-                     </div>
-                     <div class="form-contact">
-                         <label for="message">Message:</label>
-                         <textarea id="message" name="message" rows="5" required></textarea>
-                     </div>
-                     <button type="submit">Envoyer</button>
-                 </form>
-             </div>
-             </div>
+            <div class="contact-form">
+                    <h2>Contactez-nous</h2>
+                    <form id="contact-form" method="POST" action="../functions/send_mail.php">
+                        <?php if (isset($_GET['success'])): ?>
+                            <p class="success-message">Votre message a été envoyé avec succès !</p>
+                        <?php endif; ?>
+
+                        <div class="container-field">
+                            <label for="name">Nom :</label>
+                            <input type="text" id="name" name="name" placeholder="Entrer votre Nom *" required>
+                        </div>
+                        
+                        <div class="container-field">
+                            <label for="email">Adresse Email :</label>
+                            <input type="email" id="email" name="email" placeholder="Entrer votre E-mail*" required>
+                        </div>
+                        
+                        <div class="container-field">
+                            <label for="phone">Téléphone :</label>
+                            <input type="tel" id="phone" name="phone" placeholder="Entrer votre téléphone *" required>
+                        </div>
+
+                        <div class="container-field">
+                            <label for="subject">Sujet :</label>
+                            <input type="text" id="subject" name="subject" placeholder="Entrer le sujet de votre message ..." required>
+                        </div>
+                        
+                        <div class="container-field">
+                            <label for="message">Message :</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Entrer votre  Message ..." required></textarea>
+                        </div>
+                        <button type="submit">Envoyer</button>
+                    </form>
+                </div>
+
+            </div>
         </section>
 
       </main>
-   
-
     <!-- Footer -->
      <?php include '../includes/footer.php'?>
    
 
-    <script type="module" src="./assets/script/app.js"></script>
+     <script src="./assets/script/app.js"></script>
+    <script src="./assets/script/function.js"></script>
+    <script src="./assets/script/script.js"></script>
 </body>
 </html>
 

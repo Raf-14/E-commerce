@@ -88,5 +88,122 @@
         "category_id": 1,
         "description": "A sweet and fruity fruit with a tangy flavor.",
         "image_url": "assets/images/fruits/Mange.jpeg"
+    },
+    {
+        "id": 11,
+        "name": "avocat",
+        "price": 1.00,
+        "stock": 80,
+        "category_id": 2,
+        "description": "A tasty and delicious fruit with a sweet and creamy texture.",
+        "image_url": "assets/images/aliments/avocat.jpeg"
+    },
+    {
+        "id": 12,
+        "name": "brocolie",
+        "price": 0.80,
+        "stock": 100,
+        "category_id": 2,
+        "description": "A tasty and delicious vegetable with a sweet and creamy texture.",
+        "image_url": "assets/images/aliments/brocolie.jpeg"
+    },
+    {
+        "id": 13,
+        "name": "Carotte",
+        "price": 0.90,
+        "stock": 75,
+        "category_id": 2,
+        "description": "A tasty and delicious vegetable with a sweet and creamy texture.",
+        "image_url": "assets/images/aliments/carotte.jpeg"
+    },
+    {
+        "id": 14,
+        "name": "Céleri",
+        "price": 1.50,
+        "stock": 30,
+        "category_id": 2,
+        "description": "A tasty and delicious vegetable with a sweet and creamy texture.",
+        "image_url": "assets/images/aliments/celerie.jpeg"
+    },
+    {
+        "id": 15,
+        "name": "Choux",
+        "price": 1.00,
+        "stock": 80,
+        "category_id": 2,
+        "description": "A tasty and delicious vegetable with a sweet and creamy texture.",
+        "image_url": "assets/images/aliments/chou.jpeg"
+    },
+    {
+        "id": 16,
+        "name": "Citron",
+        "price": 0.90,
+        "stock": 120,
+        "category_id": 2,
+        "description": "A tasty and delicious fruit with a sweet and creamy texture.",
+        "image_url": "assets/images/aliments/citron.jpeg"
+    },
+    {
+        "id": 17,
+        "name": "Chili_Pepper",
+        "price": 1.20,
+        "stock": 50,
+        "category_id": 2,
+        "description": "A tasty and delicious vegetable with a sweet and creamy texture.",
+        "image_url": "assets/images/aliments/Chili_Pepper.jpeg"
+    },
+    {
+        "id": 18,
+        "name": "Gingembre",
+        "price": 1.40,
+        "stock": 60,
+        "category_id": 2,
+        "description": "A tasty and delicious vegetable with a sweet and creamy texture.",
+        "image_url": "assets/images/aliments/Gingembre.jpeg"
+    },
+    {
+        "id": 19,
+        "name": "Jambon_de_terre",
+        "price": 1.30,
+        "stock": 40,
+        "category_id": 2,
+        "description": "A tasty and delicious vegetable with a sweet and creamy texture.",
+        "image_url": "assets/images/aliments/Jambon_de_terre.jpeg"
+    },
+    {
+        "id": 20,
+        "name": "Poivron",
+        "price": 1.60,
+        "stock": 30,
+        "category_id": 2,
+        "description": "A tasty and delicious vegetable with a sweet and creamy texture.",
+        "image_url": "assets/images/aliments/poivron.jpeg"
+    },
+    {
+        "id": 21,
+        "name": "Obergine",
+        "price": 0.80,
+        "stock": 100,
+        "category_id": 3,
+        "description": "A tasty and delicious fruit with a sweet and creamy texture.",
+        "image_url": "assets/images/aliments/Laubergine.jpeg"
+    },
+    {
+        "id": 22,
+        "name": "Tomate",
+        "price": 0.90,
+        "stock": 75,
+        "category_id": 3,
+        "description": "A tasty and delicious fruit with a sweet and creamy texture.",
+        "image_url": "assets/images/aliments/tomate.jpeg"
+    },
+    {
+        "id": 23,
+        "name": "Scallion",
+        "price": 1.50,
+        "stock": 30,
+        "category_id": 3,
+        "description": "A tasty and delicious vegetable with a sweet and creamy texture.",
+        "image_url": "assets/images/aliments/Scallion.jpeg"
     }
 ]

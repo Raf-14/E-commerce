@@ -1,8 +1,24 @@
 <?php
-session_start();
-require_once '../config/database.php';
-$bdd = bdd()
+if (session_status() == 'PHP_SESSION_NONE') {
+    session_start();
+}
 
+require_once '../config/database.php';
+require_once '../functions/functions.php';
+require_once '../functions/formateDate.php';
+$bdd = bdd();
+
+
+// Appelle e la fontion qui récupère les infos de l'utilisateur connecté
+
+$user = getUserInfo($_SESSION['user_id']);
+$results = createOrderHistory();
+// Vérifie si l'utilisateur est connecté
+
+if (!$user) {
+    header('Location: login.php');
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -11,114 +27,8 @@ $bdd = bdd()
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil Utilisateur</title>
+    <link rel="icon" type="image/png" href="./assets/images/logo.jpeg">
     <link rel="stylesheet" href="./assets/style/style.css">
-    <style>
-        body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 0;
-}
-
-.profile-container {
-    display: flex;
-    margin-top: 20px;
-}
-
-.profile-sidebar {
-    width: 250px;
-    background-color: #ffffff;
-    padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.profile-sidebar h2 {
-    text-align: center;
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-}
-
-.profile-sidebar ul {
-    list-style: none;
-    padding: 0;
-}
-
-.profile-sidebar ul li {
-    margin: 15px 0;
-}
-
-.profile-sidebar ul li a {
-    text-decoration: none;
-    color: #333;
-    font-size: 1rem;
-}
-
-.profile-sidebar ul li a:hover {
-    color: #007BFF;
-}
-
-.profile-content {
-    flex: 1;
-    padding: 20px;
-    background-color: #fff;
-}
-
-.profile-section {
-    margin-bottom: 30px;
-}
-
-.profile-section h3 {
-    color: #333;
-    font-size: 1.2rem;
-    margin-bottom: 15px;
-}
-
-.user-info, .address, .settings {
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-button.btn-edit {
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button.btn-edit:hover {
-    background-color: #0056b3;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-table th, table td {
-    padding: 12px;
-    border: 1px solid #ddd;
-    text-align: left;
-}
-
-table th {
-    background-color: #f8f8f8;
-    color: #333;
-}
-
-table td {
-    background-color: #f9f9f9;
-}
-
-table tr:nth-child(even) {
-    background-color: #f1f1f1;
-}
-
-    </style>
 </head>
 <body>
 
@@ -126,7 +36,7 @@ table tr:nth-child(even) {
     <?php include '../includes/header.php'?>
     
     <!-- Conteneur du profil -->
-     <main>
+<main>
      <div class="profile-container">
         <div class="profile-sidebar">
             <h2>Mon Profil</h2>
@@ -141,13 +51,39 @@ table tr:nth-child(even) {
         <div class="profile-content">
             <!-- Informations personnelles -->
             <section id="personal-info" class="profile-section">
-                <h3>Informations personnelles</h3>
-                <div class="user-info">
-                    <p><strong>Nom : </strong>Jean Dupont</p>
-                    <p><strong>Email : </strong>jean.dupont@example.com</p>
-                    <p><strong>Téléphone : </strong>+33 6 12 34 56 78</p>
-                    <button class="btn-edit">Modifier</button>
-                </div>
+                <!-- modale pour modifier les informations utilisateurs -->
+                 <div id="modal-edit-user" class="modal">
+                    <div class="modal-content">
+                        <span class="close" id="close-modal" class="btn-cancel">&times;</span>
+                        <h2>Modifier mes informations</h2>
+                        <form id="edit-user-form">
+                            <label for="username">Nom :</label>
+                            <input type="text" id="username" name="username" value="<?= $user['username']?>" required>
+                            <label for="last_name">Prénom:</label>
+                            <input type="text" id="last_name" name="last_name" value="<?=$user['last_name'] ?>" required>
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" value="<?=$user['email'] ?>" required>
+                            <label for="phone">Téléphone:</label>
+                            <input type="text" id="phone" name="phone" value="<?=$user['phone'] ?>" required>
+                            <button type="submit">Sauvegarder</button>
+                        </form>
+                    </div>
+                 </div>
+                 <!-- Formulaire pour modifier les informations utilisateurs -->
+
+
+                <?php    
+                    // Affichage des information d'utilisateur connecté
+                    echo '
+                        <h3>Informations personnelles</h3>
+                        <div class="user-info">
+                            <p><strong>Nom : </strong>'. $user['username']. '</p>
+                            <p><strong>Prénom : </strong>'. $user['last_name']. '</p>
+                            <p><strong>Email : </strong>'. $user['email']. '</p>
+                            <p><strong>Téléphone : </strong>'. $user['phone']. '</p>
+                            <button class="btn-edit" id="open-modal">Modifier</button>
+                        </div>';
+                ?>
             </section>
 
             <!-- Historique des commandes -->
@@ -157,36 +93,47 @@ table tr:nth-child(even) {
                     <thead>
                         <tr>
                             <th>Numéro de commande</th>
+                            <th>Produit</th>
+                            <th>Quantité</th>
+                            <th>Prix unitaire</th>
                             <th>Date</th>
                             <th>Status</th>
-                            <th>Total</th>
+                            <th>Prix total</th>
+
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>#12345</td>
-                            <td>12/01/2025</td>
-                            <td>Livrée</td>
-                            <td>45,90 €</td>
-                        </tr>
-                        <tr>
-                            <td>#12346</td>
-                            <td>05/01/2025</td>
-                            <td>En cours</td>
-                            <td>29,99 €</td>
-                        </tr>
-                        <!-- Ajoutez plus de lignes de commande ici -->
+                       <?php 
+                       foreach ($results as $row) {
+                        $formattedDate = formatDate($row['order_date'], $months, $days); // Appeler la fonction ici
+                        echo "<tr>
+                                <td>{$row['order_number']}</td>
+                                <td>{$row['product_name']}</td>
+                                <td>{$row['quantity']}</td>
+                                <td>{$row['unit_price']} €</td>
+                                <td>{$formattedDate}</td>
+                                <td>{$row['status']}</td>
+                                <td>{$row['total_price']} €</td>
+                              </tr>";
+                    }
+                     ?>
                     </tbody>
                 </table>
+                        <!-- Ajoutez d'un lien pour voir le reste du tableau -->
+                        <a href="#" class="link">Voir plus</a>
             </section>
 
             <!-- Adresse de livraison -->
             <section id="shipping-address" class="profile-section">
-                <h3>Adresse de livraison</h3>
-                <div class="address">
-                    <p><strong>Adresse :</strong> 123 Rue de Paris, 75001 Paris, France</p>
-                    <button class="btn-edit">Modifier l'adresse</button>
-                </div>
+                <?php
+                  // Affichage de l'adresse de livraison utilisateur connecté 
+                  echo '
+                        <h3>Adresse de livraison</h3>
+                        <div class="address">
+                            <p><strong>Adresse :</strong> '. $user['address']. '</p>
+                            <button class="btn-edit">Modifier l\'adresse</button>
+                        </div>';
+                ?>
             </section>
 
             <!-- Paramètres du compte -->
@@ -201,24 +148,49 @@ table tr:nth-child(even) {
             </section>
         </div>
     </div>
+     
+</main>
+<!-- Pied de page -->
+<?php include '../includes/footer.php'?>
 
-     </main>
     <script>
         // Exemple de gestion d'édition des informations de profil
-document.querySelectorAll('.btn-edit').forEach(button => {
-    button.addEventListener('click', (e) => {
-        const section = e.target.closest('.profile-section');
-        const sectionName = section.querySelector('h3').innerText;
-        
-        alert(`Vous modifiez la section : ${sectionName}`);
-        // Ici, vous pouvez ajouter de la logique pour afficher un formulaire d'édition.
-    });
-});
+        document.querySelectorAll('.btn-edit').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const section = e.target.closest('.profile-section');
+                const sectionName = section.querySelector('h3').innerText;
+                
+                // alert(`Vous modifiez la section : ${sectionName}`);
+                // Ici, vous pouvez ajouter de la logique pour afficher un formulaire d'édition.
+                showModalEditUser();
+                document.getElementById('close-modal').addEventListener('click', closeModalEditUser);
+                // Exemple de gestion du formulaire de modification des informations utilisateurs
+                document.getElementById('open-modal').addEventListener('click', () => {
+                const firstName = document.getElementById('first-name').value;
+                const lastName = document.getElementById('last-name').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+            
+                alert(`Vous modifiez vos informations personnelles : Prénom : ${firstName}, Nom : ${lastName}, Email : ${email}, Téléphone : ${phone}`);
+                closeModalEditUser()
+        });
+            });
+        });
+         // Fonction pour afficher le modal de modification des informations utilisateurs
+        function showModalEditUser() {
+            document.getElementById('modal-edit-user').style.display = 'block';
+        }
 
-    </script> <!-- Fichier JavaScript à inclure -->
- <script type="module" src="./assets/script/app.js"></script>
-    <!-- footer  -->
-     <?php include '../includes/footer.php';?>
+        // Fonction pour fermer le modal de modification des informations utilisateurs
+        function closeModalEditUser() {
+            document.getElementById('modal-edit-user').style.display = 'none';
+        }
+
+    </script> 
+        
+    <script src="./assets/script/app.js"></script>
+    <script src="./assets/script/function.js"></script>
+    <script src="./assets/script/script.js"></script>   
 </html>
 </body>
 </html>

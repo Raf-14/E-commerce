@@ -1,7 +1,14 @@
 <?php
 require_once '../config/database.php';
-$bdd = bdd()
+require_once '../functions/functions.php';
+$bdd = bdd();
+// session_start();
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+    header("Location: index.php");  // Rediriger vers la page d'accueil si déjà connecté
+    exit;
+}
 
+loginUser();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,138 +16,64 @@ $bdd = bdd()
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log in</title>
-    <link rel="stylesheet" type="text/css"  href="./assets/style/style.css"> <!-- link to your CSS file -->
-    <style>
-    /* Style pour le spinner */
-    .lds-spinner {
-        display: block;
-        width: 80px;
-        height: 80px;
-        margin: 0 auto;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    .lds-spinner div {
-        position: absolute;
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: #000;
-        animation: lds-spinner 1.2s linear infinite;
-    }
-
-    .lds-spinner div:nth-child(1) {
-        animation-delay: -1.1s;
-    }
-
-    .lds-spinner div:nth-child(2) {
-        animation-delay: -1s;
-    }
-
-    .lds-spinner div:nth-child(3) {
-        animation-delay: -0.9s;
-    }
-
-    .lds-spinner div:nth-child(4) {
-        animation-delay: -0.8s;
-    }
-
-    .lds-spinner div:nth-child(5) {
-        animation-delay: -0.7s;
-    }
-
-    .lds-spinner div:nth-child(6) {
-        animation-delay: -0.6s;
-    }
-
-    .lds-spinner div:nth-child(7) {
-        animation-delay: -0.5s;
-    }
-
-    .lds-spinner div:nth-child(8) {
-        animation-delay: -0.4s;
-    }
-
-    @keyframes lds-spinner {
-        0% {
-            transform: rotate(0deg);
-        }
-
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-</style>
-
+    <link rel="stylesheet" type="text/css"  href="./assets/style/style.css"> 
 </head>
 
 <body>
     <!-- Header of page include since includes header.php -->
      <?php include '../includes/header.php';?>
      
-   <main>
-   <?php
-// session_start();
-
-// Traitement de la connexion
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Connexion à la base de données
-    try {
-
-        $bdd = bdd();
-
-        // Récupérer les informations du formulaire
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        
-        // Vérifier si l'utilisateur existe
-        $query = "SELECT id, email, password, role FROM users WHERE email = :email";
-        $stmt = $bdd->prepare($query);
-        $stmt->execute(['email' => $email]);
-        $user = $stmt->fetch();
-        
-        if ($user && password_verify($password, $user['password'])) {
-            // Authentification réussie
-            $_SESSION['logged_in'] = true;
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['user_email'] = $user['email'];
-            $_SESSION['user_role'] = $user['role']; // Stocke le rôle de l'utilisateur
-            
-            // Rediriger selon le rôle
-            if ($user['role'] === 'admin') {
-                // Rediriger l'administrateur vers la page d'administration
-                header('Location: admin_dashboard.php');
-                exit;
-            } else {
-                // Rediriger un utilisateur normal vers la page d'accueil
-                header('Location: index.php');
-                exit;
-            }
-        } else {
-            // Afficher un message d'erreur si l'authentification échoue
-            echo "<p class='error'>Identifiants invalides.</p>";
-        }
-    } catch (PDOException $e) {
-        echo "Erreur de connexion : " . $e->getMessage();
-    }
-}
-?>
-
-<main>
     <section>
         <!-- Formulaire de connexion -->
-        <form action="login.php" method="post" class="log_in" onsubmit="showSpinner()">
+        <form action="" method="post" class="log_in" onsubmit="showSpinner()">
             <h2>Connexion</h2>
+             <!-- vérification du tableau erreur si , ils ne sont pas vide lors d'insertion de donnée -->
+                <div class="display-message"
+                style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    gap: 10px;
+                    color: red;
+                    font-size: 0.9em;
+                    margin: 0;
+                    padding: 0;
+                    list-style-type: none;
+                    border: none;
+                    background-color: transparent;
+                    font-size: 1em;
+                    color: red;
+                    width: 100%;
+                    max-width: 250px;
+                    margin: 0 auto;
+                    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+                    padding: 10px;
+                    border-radius: 5px;
+                    transition: all 0.3s ease-in-out;
+                "
+                >
+                <!-- Affichage des erreurs -->
+                <?php
+                if (isset($_SESSION['login_errors'])) {
+                    foreach ($_SESSION['login_errors'] as $error) {
+                        echo "<p style='color:red;'>$error</p>";
+                    }
+                    unset($_SESSION['login_errors']); // Supprimer après affichage
+                }
+                ?>
+                </div>
             <div class="form-groupe">
                 <label for="email">Email :</label>
                 <input type="email" id="email" name="email" required>
+                <span class="success"></span>
+                <span class="error"></span>
             </div>
             <div class="form-groupe">
                 <label for="password">Mot de passe :</label>
                 <input type="password" id="password" name="password" required>
+                <span class="success"></span>
+                <span class="error"></span>
             </div>
 
             <button type="submit">Connexion</button>
@@ -148,31 +81,98 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <p><a href="register.php">Pas encore de compte ? Inscrivez-vous ici.</a></p>
 
             <!-- Lien pour mot de passe oublié -->
-            <p><a href="#" class="forgot">Mot de passe oublié ?</a></p>
+            <p><a href="" class="forgot">Mot de passe oublié ?</a></p>
 
             <!-- Affichage du spinner de chargement -->
-            <div id="spinner" class="lds-spinner" style="display:none;"></div>
+            <div id="spinner" class="lds-spinner" style="display:none;">
+                <div></div><div></div><div></div><div></div><div></div><div></div>
+                <div></div><div></div><div></div><div></div><div></div><div></div>
+            </div>
+
         </form>
     </section>
 </main>
 
+<script src="./assets/script/app.js"></script>
 <script>
-    // Fonction pour afficher le spinner pendant le traitement du formulaire
+    
+    //Afficher et cacher le spiner
     function showSpinner() {
         document.getElementById("spinner").style.display = "block";
     }
+    // Cacher le spinner
+    function hideSpinner() {
+        document.getElementById("spinner").style.display = "none";
+    }
+    // Fonction pour afficher le message d'erreur lors de la connexion
+    function showErrorMessages(errors) {
+        const errorMessages = document.getElementById('error-messages');
+        errorMessages.innerHTML = "";
+        errors.forEach(error => {
+            const errorMessage = document.createElement('li');
+            errorMessage.textContent = error;
+            errorMessages.appendChild(errorMessage);
+        });
+    }
+    // Fonction pour masquer tous les messages d'erreur
+    function clearErrorMessages() {
+        const errorMessages = document.getElementById('error-messages');
+        errorMessages.innerHTML = "";
+    }
+    // Fonction pour masquer le message d'erreur lors de la connexion
+    // Fonction pour masquer le message d'erreur lors de la connexion
+    function hideError() {
+        document.querySelector('.error').style.display = "none";
+    }
+    // Fonction pour afficher le message d'erreur lors de la connexion
+    function showError() {
+        document.querySelector('.error').style.display = "block";
+    }
+    // Fonction pour vérifier la validité de l'email lors du changement de texte
+    function validateEmail() {
+        const emailInput = document.getElementById('email');
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(emailInput.value)) {
+            emailInput.classList.add('error');
+        } else {
+            emailInput.classList.remove('error');
+        }
+        validateForm();
+    }
+    // Fonction pour vérifier la validité du mot de passe lors du changement de texte
+    function validatePassword() {
+        const passwordInput = document.getElementById('password');
+        const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/;
+        if (!passwordPattern.test(passwordInput.value)) {
+            passwordInput.classList.add('error');
+        } else {
+            passwordInput.classList.remove('error');
+        }
+        validateForm();
+    }
+    // Fonction pour vérifier la validité du formulaire
+    function validateForm() {
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const submitBtn = document.querySelector('.log_in button');
+        submitBtn.disabled =!(emailInput.checkValidity() && passwordInput.checkValidity());
+        hideError();
+        hideSpinner();
+        validateEmail();
+        validatePassword();
+        if (submitBtn.disabled) {
+            submitBtn.classList.add('disabled');
+        } else {
+            submitBtn.classList.remove('disabled');
+        }
+        return!submitBtn.disabled;
+         submitBtn.disabled = emailInput.value === '' || passwordInput.value === '';
+         return!submitBtn.disabled;
+    }
 </script>
-
-   </main>
-
    
-
-     
     <!-- Footer of page include since includes footer.php -->
      <?php include '../includes/footer.php';?>
-
-
      <script type="module" src="./assets/js/script.js"></script> <!-- link to your JavaScript file -->
-</html>
 </body>
 </html>

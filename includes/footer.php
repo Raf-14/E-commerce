@@ -1,6 +1,6 @@
 <footer>
         <div class="footer">
-            &copy; 2021 - Tous droits réservés
+            &copy; 2025 eCommerce. Tous droits réservés.
             <a href="#">Mentions légales</a>
             <a href="#">Conditions d'utilisation</a>
             <a href="#">Nous contacter</a>

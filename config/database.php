@@ -1,61 +1,33 @@
 <?php
 
-//Function to Connect to the database
-
+// Function to connect to the database
 function bdd() {
     // Database connection details
     $host = "localhost";
     $username = "root";
     $password = "";
-    $db_name = "e_commerce";
+    $db_name = "e_commerce1";
     
     try {
-        // Crée une nouvelle instance PDO et se connecte à la base de données
-        $conn = new PDO("mysql:host=$host;dbname=$db_name", $username, $password);
+        // Create a new PDO instance and connect to the database
+        $conn = new PDO("mysql:host=$host;dbname=$db_name;charset=utf8", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        echo "Connected successfully";
+        // echo "Connected successfully.<br>";
+        return $conn;
     } catch (PDOException $e) {
-        echo "Connection failed: " . $e->getMessage();
+        //die("Database connection failed: " . $e->getMessage());
+        throw new PDOException($e->getMessage());
         exit();
     }
-    
-    return $conn;
 }
 
-
-// $bdd = bdd();
-// // Get data from JSON file
-// $json_data = file_get_contents('../produits.json');
-
-// // Decode the JSON data into an associative array
-// $products = json_decode($json_data, true);
-
-// // Prepare the SQL query for inserting products
-// $stmt = $bdd->prepare("INSERT INTO products (name, description, price, stock, category_id, image_url) 
-//                         VALUES (:name, :description, :price, :stock, :category_id, :image_url)");
-
-// foreach ($products as $product) {
-//     // Bind parameters
-//     $stmt->bindParam(':name', $name);
-//     $stmt->bindParam(':description', $description);
-//     $stmt->bindParam(':price', $price);
-//     $stmt->bindParam(':stock', $stock);
-//     $stmt->bindParam(':category_id', $category_id);
-//     $stmt->bindParam(':image_url', $image_url);
+    // Function to get products by category from the database
+    // function get_products_by_category($category_id) {
+    //     global $bdd;
+    //     $stmt = $bdd->prepare("SELECT * FROM products WHERE category_id =?");
+    //     $stmt->execute([$category_id]);
+    //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // }
     
-//     // Assign values to the parameters
-//     $name = $product['name'];
-//     $description = $product['description'];
-//     $price = $product['price'];
-//     $stock = $product['stock'];
-//     $category_id = $product['category_id'];
-//     $image_url = $product['image_url'];
-
-//     // Execute the statement
-//     $stmt->execute();
-// }
-
-// // Success message after inserting all products
-// echo "All products have been successfully inserted.";
-
 ?>
+

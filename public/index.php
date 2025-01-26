@@ -1,6 +1,11 @@
 <?php
+if (session_status() == 'PHP_SESSION_NONE') {
+    session_start();
+}
 require_once '../config/database.php';
-$bdd = bdd()
+require_once '../functions/functions.php';
+$bdd = bdd();
+// add_to_db();
 
 ?>
 

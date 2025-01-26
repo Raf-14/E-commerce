@@ -49,3 +49,25 @@ ecommerce-project/
 ├── src/                 # Code source (contrôleurs, modèles, etc.)
 ├── templates/           # Templates HTML ou fichiers view
 └── .gitignore           # Fichier pour ignorer certains fichiers/dossiers (ex : .env)
+
+installation de ""composer require phpmailer/phpmailer""
+pour l'utilisation de phpmailer , pour gérer l'envoie de mail
+
+
+Support Client :
+
+Stocker les messages des clients, les tickets de support, et les informations de contact.
+
+Permettre aux agents de répondre aux demandes et de suivre leur statut.
+
+Suivi des Commandes :
+
+Accéder aux informations de commande depuis la base de données pour permettre aux utilisateurs de voir le statut de leur commande en temps réel.
+
+Retours et Remboursements :
+
+Gérer les demandes de retour et de remboursement, et mettre à jour le statut de chaque demande dans la base de données.
+
+FAQ :
+
+Stocker les questions fréquemment posées et leurs réponses dans une base de données pour pouvoir les afficher dynamiquement.

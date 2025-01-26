@@ -14,6 +14,28 @@
 
 --
 --
+--creation d'un table si elle n'existe pas
+
+CREATE DATABASE IF NOT EXISTS E-commerce;
+
+USE E-commerce;
+
+-- --------------------------------------------------------
+
+--creation d'une table si elle n'existe pas dans la bdd
+
+CREATE TABLE IF NOT EXISTS `products` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `description` TEXT,
+  `price` DECIMAL(10, 2) NOT NULL,
+  `stock` INT NOT NULL,
+  `category_id` INT,
+  `image_url` VARCHAR(255),
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (category_id) REFERENCES categories(id)
+)
 
 -- Création de la table categories
 CREATE TABLE categories (
@@ -57,26 +79,28 @@ CREATE TABLE products (
 
 --insertion des produits selon leurs catégories
 -- Produits de la catégorie Fruits
-INSERT INTO products (name, description, price, stock, category_id, image_url) VALUES
-('Ananas', 'Ananas fraîche et sucrée', 1.99, 50, 1, 'assets/images/fruits/ananas.jpeg'),
-('Banane', 'Banane mûre et délicieuse', 1.49, 30, 1, './assets/images/fruits/bananas.jpeg');
+-- INSERT INTO products (name, description, price, stock, category_id, image_url) VALUES
+-- ('Ananas', 'Ananas fraîche et sucrée', 1.99, 50, 1, 'assets/images/fruits/ananas.jpeg'),
+-- ('Banane', 'Banane mûre et délicieuse', 1.49, 30, 1, './assets/images/fruits/bananas.jpeg');
 
--- Produits de la catégorie Légumes
-INSERT INTO products (name, description, price, stock, category_id, image_url) VALUES
-('Carotte', 'Carotte fraîche et croquante', 0.99, 100, 2, 'images/carotte.jpg'),
-('Brocoli', 'Brocoli riche en vitamines', 2.50, 60, 2, 'images/brocoli.jpg');
+-- -- Produits de la catégorie Légumes
+-- INSERT INTO products (name, description, price, stock, category_id, image_url) VALUES
+-- ('Carotte', 'Carotte fraîche et croquante', 0.99, 100, 2, 'images/carotte.jpg'),
+-- ('Brocoli', 'Brocoli riche en vitamines', 2.50, 60, 2, 'images/brocoli.jpg');
 
--- Produits de la catégorie Produits frais
-INSERT INTO products (name, description, price, stock, category_id, image_url) VALUES
-('Lait', 'Lait entier frais', 1.20, 200, 3, 'images/lait.jpg'),
-('Yaourt nature', 'Yaourt nature crémeux', 0.80, 150, 3, 'images/yaourt.jpg');
+-- -- Produits de la catégorie Produits frais
+-- INSERT INTO products (name, description, price, stock, category_id, image_url) VALUES
+-- ('Lait', 'Lait entier frais', 1.20, 200, 3, 'images/lait.jpg'),
+-- ('Yaourt nature', 'Yaourt nature crémeux', 0.80, 150, 3, 'images/yaourt.jpg');
 
 
 -- Création de la table orders (commandes)
 CREATE TABLE orders (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
-    total DECIMAL(10, 2) NOT NULL,
+    address TEXT NOT NULL,
+    payment_method VARCHAR(50) NOT NULL,
+    total_price DECIMAL(10, 2) NOT NULL,
     status ENUM('pending', 'completed', 'shipped', 'cancelled') DEFAULT 'pending',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id)
@@ -102,3 +126,51 @@ CREATE TABLE cart (
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (product_id) REFERENCES products(id)
 );
+
+--Création de la table mail
+
+CREATE TABLE emails (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    name VARCHAR(255) NOT NULL,
+    phone VARCHAR(15) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    subject VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+)
+
+
+-- Création de la table reviews (avis)
+CREATE TABLE reviews (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT,
+    user_id INT,
+    rating INT NOT NULL CHECK (rating >= 1 AND rating <= 5),
+    comment TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (product_id) REFERENCES products(id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+)
+
+
+
+--modification d'une table
+
+-- ALTER TABLE orders ADD COLUMN user_email VARCHAR(255) NOT NULL AFTER user_id;
+--ALTER TABLE orders ADD CONSTRAINT fk_orders_users_email FOREIGN KEY (user_email) REFERENCES users(email);
+
+--modification d'une table précise par son id
+--UPDATE `products` SET `image_url` = 'assets/images/aliments/Chili_Peppers.jpeg' WHERE `products`.`id` = 17;
+
+--Destruction des tables
+
+-- DROP TABLE reviews;
+-- DROP TABLE cart;
+-- DROP TABLE order_details;
+-- DROP TABLE orders;
+-- DROP TABLE products;
+-- DROP TABLE users;
+-- DROP TABLE categories;
+

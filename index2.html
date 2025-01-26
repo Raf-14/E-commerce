@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wavy Paragraph Effect</title>
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .wave-container {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            text-align: center;
+            background-color: #ff3c00;
+            color: white;
+            overflow: hidden;
+            padding: 5rem 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .wave-container h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .wave-container p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto 1rem;
+            padding: 0 1rem;
+        }
+
+        .wave-container svg {
+            position: absolute;
+            width: 100%;
+            height: auto;
+        }
+
+        .wave-top {
+            top: 0;
+        }
+
+        .wave-bottom {
+            bottom: 0;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .wave-container h1 {
+                font-size: 2.5rem;
+            }
+
+            .wave-container p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .wave-container h1 {
+                font-size: 2rem;
+            }
+
+            .wave-container p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wave-container">
+        <!-- Wave Top -->
+        <svg class="wave-top" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 319">
+            <path fill="#F3F4F5" d="M0,192L34.3,192C68.6,192,137,192,206,202.7C274.3,213,343,235,411,218.7C480,203,549,149,617,154.7C685.7,160,754,224,823,234.7C891.4,245,960,203,1029,160C1097.1,117,1166,75,1234,69.3C1302.9,64,1371,96,1406,112L1440,128L1440,0L1405.7,0C1371.4,0,1303,0,1234,0C1165.7,0,1097,0,1029,0C960,0,891,0,823,0C754.3,0,686,0,617,0C548.6,0,480,0,411,0C342.9,0,274,0,206,0C137.1,0,69,0,34,0L0,0Z"></path>
+        </svg>
+
+        <h1>Wavy Banner Effect</h1>
+        <p>This paragraph is inside the wavy container. The effect creates a dynamic shape, with waves on both the top and bottom.</p>
+        <p>It ensures that the text stays visually aligned and looks aesthetically pleasing.</p>
+
+        <!-- Wave Bottom -->
+        <svg class="wave-bottom" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 319">
+            <path fill="#F3F4F5" d="M0,192L34.3,192C68.6,192,137,192,206,202.7C274.3,213,343,235,411,218.7C480,203,549,149,617,154.7C685.7,160,754,224,823,234.7C891.4,245,960,203,1029,160C1097.1,117,1166,75,1234,69.3C1302.9,64,1371,96,1406,112L1440,128L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z"></path>
+        </svg>
+    </div>
+<script>
+     // Exemple de gestion de la suppression d'un produit dans le panier
+     document.querySelectorAll('.remove-product').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const productName = e.target.closest('.product').querySelector('.product-name').innerText;
+            
+            alert(`Vous supprimez le produit : ${productName}`);
+            // Ici, vous pouvez ajouter de la logique pour supprimer le produit du panier.
+        });
+    });
+    
+    // Exemple de gestion de la modification des quantités des produits dans le panier
+    document.querySelectorAll('.quantity-input').forEach(input => {
+        input.addEventListener('change', (e) => {
+            const productName = e.target.closest('.product').querySelector('.product-name').innerText;
+            const quantity = e.target.value;
+            
+            alert(`Vous modifiez la quantité du produit : ${productName} à ${quantity}`);
+            // Ici, vous pouvez ajouter de la logique pour mettre à jour la quantité du produit dans le panier.
+        });
+    });   
+</script>
+</body>
+</html>

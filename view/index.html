@@ -287,6 +287,17 @@ h1 {
 }
 
     </style>
+    <script>
+        function validateForm() {
+            var password = document.forms["checkoutForm"]["password"].value;
+            var confirmPassword = document.forms["checkoutForm"]["confirmPassword"].value;
+            if (password!= confirmPassword) {
+                alert("Les mots de passe ne correspondent pas.");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -435,8 +446,110 @@ btnVoirPlus.addEventListener('click', () => {
 
 // Créer une carte pour chaque produit
 products.forEach(createCard);
+ </script>
+ <script>
+    /**script pour le fichier register.php*/
+    // Style lors d'insertion d'information de l'utilisateur
+document.querySelectorAll('.form-groupe').forEach(group => {
+    group.addEventListener('input', () => {
+        group.classList.remove('error');
+    });
+});
 
+// Validation du formulaire
+document.getElementById('register-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    document.getElementById('spinner').style.display = 'block';
+    let username = document.getElementById('username').value;
+    let last_name = document.getElementById('last_name').value;
+    let email = document.getElementById('email').value;
+    let password = document.getElementById('password').value;
+    let confirm_password = document.getElementById('confirm_password').value;
+    let phone = document.getElementById('phone').value;
+    let address = document.getElementById('address').value;
+    let secret_code = document.getElementById('secret_code').value;
+    let errors = [];
 
-    </script>
+    // Vérification des champs obligatoires
+    if (username === '') {
+        errors.push('Le nom d\'utilisateur est obligatoire.');
+    }
+    if (last_name === '') {
+        errors.push('Le prénom est obligatoire.');
+    }
+    if (email === '') {
+        errors.push('L\'adresse email est obligatoire.');
+    }
+    if (password === '') {
+        errors.push('Le mot de passe est obligatoire.');
+    }
+    if (confirm_password === '') {
+        errors.push('Confirmer le mot de passe est obligatoire.');
+    }
+    if (phone === '') {
+        errors.push('Le téléphone est obligatoire.');
+    }
+    if (address === '') {
+        errors.push('L\'adresse est obligatoire.');
+    }
+
+    // Vérification de la validité de l'email
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errors.push('L\'adresse email n\'est pas valide.');
+    }
+
+    // Vérification des mots de passe identiques
+    if (password !== confirm_password) {
+        errors.push('Les mots de passe ne sont pas identiques.');
+    }
+
+    // Si il y a des erreurs, on les affiche
+    if (errors.length > 0) {
+        document.getElementById('spinner').style.display = 'none';
+        errors.forEach(error => {
+            let errorMessage = document.createElement('p');
+            errorMessage.style.color = 'red';
+            errorMessage.textContent = error;
+            document.querySelector('.form-container').appendChild(errorMessage);
+        });
+        return;
+    }
+
+    // Si aucune erreur, on envoie les données vers le serveur
+    fetch('register.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `username=${username}&last_name=${last_name}&email=${email}&password=${password}&phone=${phone}&address=${address}&secret_code=${secret_code}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Si la réponse est positive, on affiche un message de succès et on efface les champs
+        if (data.success) {
+            document.getElementById('spinner').style.display = 'none';
+            document.querySelector('.form-container').innerHTML = '<p style="color: green;">Compte créé avec succès!</p>';
+            document.querySelectorAll('.form-groupe input').forEach(input => {
+                input.value = '';
+            });
+        } else {
+            document.getElementById('spinner').style.display = 'none';
+            let errorMessage = document.createElement('p');
+            errorMessage.style.color = 'red';
+            errorMessage.textContent = data.error;
+            document.querySelector('.form-container').appendChild(errorMessage);
+        }
+    })
+    .catch(error => {
+        // Si une erreur est survenue, on affiche un message d'erreur
+        document.getElementById('spinner').style.display = 'none';
+        let errorMessage = document.createElement('p');
+        errorMessage.style.color = 'red';
+        errorMessage.textContent = 'Erreur lors de la création du compte. Veuillez réessayer plus tard.';
+        document.querySelector('.form-container').appendChild(errorMessage);
+    });
+});
+
+ </script>
 </body>
 </html>
