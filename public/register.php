@@ -1,8 +1,7 @@
 <?php 
  require_once "../config/database.php";
- require_once "../functions/functions.php";
  $bdd = bdd();
- addUser();
+
 //  session_start();
  if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
      header("Location: index.php");  // Rediriger vers la page d'accueil si déjà connecté
@@ -203,7 +202,7 @@ $('#register-form').on('submit', function(e) {
 
     // Si aucune erreur, on envoie les données vers le serveur
     $.ajax({
-        url: 'register.php',
+        url: 'http://localhost/E-commerce/functions/functions.php',
         method: 'POST',
         data: {
             username: username,

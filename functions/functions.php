@@ -170,9 +170,16 @@ function cleanUserData($data) {
     return $data;
 }
 
-// Fonction qui ajoute un nouvel utilisateur dans la base de données
 function addUser() {
-    global $bdd;
+    // Connexion à la bdd
+    try {
+        $bdd = new PDO("mysql:host=localhost;dbname=e_commerce1", "root", "");
+        $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $bdd->exec("SET CHARACTER SET utf8");
+    } catch (PDOException $e) {
+        throw new PDOException($e->getMessage());
+        exit();
+    }
     $errors = [];
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -197,13 +204,13 @@ function addUser() {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errors[] = "L'email n'est pas valide.";
         }
-        if($password < 10){
+        if (strlen($password) < 10) {
             $errors[] = "Le mot de passe doit contenir au moins 10 caractères.";
         }
         if (empty($confirm_password)) {
             $errors[] = "Le mot de passe de confirmation est obligatoire.";
         }
-        if ($password!== $confirm_password) {
+        if ($password !== $confirm_password) {
             $errors[] = "Les mots de passe ne correspondent pas.";
         }
         if (empty($phone)) {
@@ -233,19 +240,11 @@ function addUser() {
         //     $errors[] = "Le code secret est incorrect.";
         // }
 
-        // Si des erreurs existent, les stocker en session et rediriger
-        if (!empty($errors)) {
-            $_SESSION['errors'] = $errors;
-            header("Location: register.php"); // Retourner à la page du formulaire
-            exit;
-        }
-       
-
         // Vérification si l'email existe déjà dans la base de données
         $checkEmailStmt = $bdd->prepare("SELECT id FROM users WHERE email = :email");
         $checkEmailStmt->execute([':email' => $email]);
         if ($checkEmailStmt->rowCount() > 0) {
-            $errors = "L'email est déjà utilisé.";
+            $errors[] = "L'email est déjà utilisé.";
         }
 
         // Vérification du code secret pour attribuer le rôle 'admin'
@@ -253,41 +252,46 @@ function addUser() {
             $role = 'admin'; // Si le code secret est correct, l'utilisateur devient admin
         }
 
-         // Si aucune erreur, procéder à l'insertion
-         if (empty($errors)) {
-            try {
-                // Hashage du mot de passe
-                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-                $stmt = $bdd->prepare(
-                    "INSERT INTO users (username, last_name, email, password, phone, address, role) 
-                    VALUES (:username, :last_name, :email, :password, :phone, :address, :role)"
-                );
-                $stmt->execute([
-                    ':username' => $username,
-                    ':last_name' => $last_name,
-                    ':email' => $email,
-                    ':password' => $hashed_password,
-                    ':phone' => $phone,
-                    ':address' => $address,
-                    ':role' => $role
-                ]);
-                echo json_encode(['message' => "Votre compte a été créé avec succès! Vous pouvez vous connecter maintenant."]);
+        // Si des erreurs existent, les stocker en session et rediriger
+        if (!empty($errors)) {
+            $_SESSION['errors'] = $errors;
+            header("Location: register.php"); // Retourner à la page du formulaire
+            exit();
+        }
 
-                // Définir les variables de session
-                $_SESSION['logged_in'] = true;
-                $_SESSION['user_id'] = $bdd->lastInsertId();
-                $_SESSION['user_role'] = $role;
-                
-                // Redirection selon le rôle de l'utilisateur
-                if ($role === 'admin') {
-                    header('Location: admin_dashboard.php');
-                } else {
-                    header('Location: profile.php');
-                }
-                exit;
-            } catch (PDOException $e) {
-                $errors = "Erreur lors de la création de votre compte. Veuillez réessayer plus tard.";
+        // Si aucune erreur, procéder à l'insertion
+        try {
+            // Hashage du mot de passe
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            $stmt = $bdd->prepare(
+                "INSERT INTO users (username, last_name, email, password, phone, address, role) 
+                VALUES (:username, :last_name, :email, :password, :phone, :address, :role)"
+            );
+            $stmt->execute([
+                ':username' => $username,
+                ':last_name' => $last_name,
+                ':email' => $email,
+                ':password' => $hashed_password,
+                ':phone' => $phone,
+                ':address' => $address,
+                ':role' => $role
+            ]);
+            echo json_encode(['message' => "Votre compte a été créé avec succès! Vous pouvez vous connecter maintenant."]);
+
+            // Définir les variables de session
+            $_SESSION['logged_in'] = true;
+            $_SESSION['user_id'] = $bdd->lastInsertId();
+            $_SESSION['user_role'] = $role;
+            
+            // Redirection selon le rôle de l'utilisateur
+            if ($role === 'admin') {
+                header('Location: admin_dashboard.php');
+            } else {
+                header('Location: profile.php');
             }
+            exit();
+        } catch (PDOException $e) {
+            $errors[] = "Erreur lors de la création de votre compte. Veuillez réessayer plus tard.";
         }
 
         // Si des erreurs existent, les renvoyer sous forme de JSON
@@ -296,6 +300,10 @@ function addUser() {
         }
     }
 }
+
+// Appelle de la fonction pour ajouter un nouveau user
+addUser();
+
 
 // Fonction pour se loger
 
