@@ -9,6 +9,7 @@ require './vendor/autoload.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = htmlspecialchars($_POST['name']);
+    $last_name = htmlspecialchars($_POST['prenom']);
     $email = htmlspecialchars($_POST['email']);
     $message = htmlspecialchars($_POST['message']);
 
@@ -28,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com'; // Remplacez par votre hôte SMTP
         $mail->SMTPAuth = true;
-        $mail->Username = 'lawalrafiou2@gmail.com'; // Votre adresse email
+        $mail->Username = 'lizbamby59@gmail.com'; // Votre adresse email
         $mail->Password = 'dtxcpmnmuwaqezyu'; // Mot de passe
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Sécurisation
         $mail->Port = 587; // Port SMTP
@@ -36,8 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Paramètres de l'email
         $mail->setFrom($email, $name);
-        $mail->addAddress('lawalrafiou2@gmail.com'); // Adresse du destinataire
-        $mail->Body = "Nom : $name\nEmail : $email\n\nMessage :\n$message";
+        $mail->addAddress('lizbamby59@gmail.com'); // Adresse du destinataire
+        $mail->Body = "Nom : $name $last_name \nEmail : $email\n\nMessage :\n$message";
 
         // Envoyer l'email
         $mail->send();
