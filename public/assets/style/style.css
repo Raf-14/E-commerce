@@ -5,12 +5,15 @@
     box-sizing: border-box;
 }
 
-/*Définition de toutes les couleurs et font  à utiliser  */
+/* Définition de toutes les couleurs et font  à utiliser  */
 
 :root {
     --primary-color: #ff6347;
+    --primary-hover: #ff8a65;
+    --green-hover: #388e3c;
     --secondary-color: #333;
     --tertiary-color: #f1f1f1;
+    --button-color: #fff;
     --link-color: #007bff;
     --font-family: 'Poppins', sans-serif;
     --Arial: Arial, sans-serif;
@@ -224,15 +227,15 @@ header .menu-toggle span {
 
 .hero .cta-btn {
     background-color: var(--primary-color);
-    color: white;
+    color: var(--button-color);
     padding: 15px 30px;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 800;
     border-radius: 5px;
 }
 
 .hero .cta-btn:hover {
-    background-color: #e53e35;
+    background-color: var(--primary-hover);
 }
 
 /* Sections */
@@ -296,6 +299,21 @@ section {
  /* style pour la page shop */
 
  /* Style pour la section de recherche */
+   /* Réglage du menu déroulant pour les catégories */
+   select.category-dropdown {
+    display: none;
+    width: 50%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    }
+    /* Réglage des boutons pour les catégories */
+    button.category-btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    }   
 
 .search {
     display: flex;
@@ -347,7 +365,7 @@ section {
     align-items: center;
     flex-direction: column;
     margin: 20px 0;
-    background-color: rgba(233, 233, 233, a);
+    /* background-color: rgba(233, 233, 233, .5); */
     font-weight: 600;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -385,9 +403,13 @@ ul {
 }
 
 .filter ul li:hover {
-    background-color: var(--primary-color);
     transform: translateY(-2px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filter ul li a {
+    color: #333;
+    text-decoration: none;
 }
 /*style animation remplissage */
 
@@ -482,25 +504,20 @@ ul {
     position: relative;
 }
 
-/* Animation au survol du titre */
-.card h2:hover {
-    background-color: var(--primary-color);
-    color: #fff;
-}
-
 /* Style pour les prix des produits */
 .card h4 {
     font-size: 1em;
-    color: var(--link-color);
+    color: var(--secondary-color);
     position: relative;
     margin: 10px 0;
 }
+
 
 /* Style pour les descriptions de produits */
 .card p {
     font-size: 0.9em;
     color: #555;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     text-align: justify;
     height: 60px;
     overflow: hidden;
@@ -508,7 +525,7 @@ ul {
 
 /* Style pour le lien Voir plus */
 .card a {
-    color: var(--link-color);
+    color: var(--primary-color);
     text-decoration: none;
     font-weight: bold;
     position: relative;
@@ -522,8 +539,10 @@ ul {
 
 /* Style pour le bouton Ajouter au panier */
 .add-to-cart {
-    background-color: #4CAF50;
+    background-color: var(--primary-color);
     color: #fff;
+    font-size: 1em;
+    font-weight: bold;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -533,7 +552,7 @@ ul {
 }
 
 .add-to-cart:hover {
-    background-color: #388e3c;
+    background-color: var(--primary-hover);
 }
    
 /* Style pour le lien de voir plus */
@@ -807,6 +826,19 @@ main section .contact-form .container-field{
     /* margin: 0; */
 }
 
+.error {
+    color: red;
+    font-size: 14px;
+    display: none;
+}
+input {
+    display: block;
+    margin-bottom: 10px;
+    padding: 8px;
+    width: 300px;
+}
+
+
 .form-container {
     max-width: 50%;
     margin: 0 auto;
@@ -894,6 +926,10 @@ button {
 
 button:hover {
     background-color: #0056b3;
+}
+#register-form button:disabled {
+    background-color: grey;
+    cursor: not-allowed;
 }
 
 .form-container a {
@@ -1280,6 +1316,9 @@ input[type="password"] {
 }
 
 .quantity-controls .delete-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 30px;
     height: 30px;
     border: none;
@@ -1294,7 +1333,6 @@ input[type="password"] {
 .quantity-controls .remove-item {
     width: 50px;
     height: 50px;
-    background-color: white;
     border: none;
     padding: 10px;
     cursor: pointer;
@@ -2005,6 +2043,25 @@ footer .social-icons a {
         width: 100%;
         margin-bottom: 20px;
     }
+    /* masquer la section grid des filtre de cathégorie d'aliment */
+    .filter {
+        display: none;
+    }
+    /* Réglage du menu déroulant pour les catégories */
+    select.category-dropdown {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        }
+        /* Réglage des boutons pour les catégories */
+        button.category-btn {
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        cursor: pointer;
+        }   
 
 }
     

@@ -1,4 +1,9 @@
 <footer>
+    <div class="info">
+        <!-- message disant que l'application est encore en cours -->
+         <p>Cette application est en cours de développement et ne contient pas tous les éléments demandés.</p>
+         <p>Merci de votre compréhension.</p>
+    </div>
         <div class="footer">
             &copy; 2025 eCommerce. Tous droits réservés.
             <a href="#">Mentions légales</a>

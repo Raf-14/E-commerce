@@ -17,15 +17,7 @@ session_start();
     <link rel="icon" type="image/png" href="./assets/images/logo.jpeg">
     <!-- <link rel="stylesheet" type="text/css" href="./assets/style/style.css"> -->
     <style>
-        /* styles.css */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f5f5f5;
-}
-
-
+/* styles for service page */
 h1, h2 {
     color: #333;
 }

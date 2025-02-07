@@ -43,31 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search'])) {
     <link rel="icon" type="image/png" href="./assets/images/logo.jpeg">
     <link rel="stylesheet" href="./assets/style/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        /* Réglage de la largeur des cartes pour la section card shop */
-       /* .container-card.card .card  #add-to-cart-btn {
-        width: 100%;
-        background-color: #444;
-        color: white;
-        border-radius: 5px;
-        padding: 10px;
-        cursor: pointer;
-        } */
-        /* Réglage du menu déroulant pour les catégories */
-        select.category-dropdown {
-        width: 50%;
-        padding: 10px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        }
-        /* Réglage des boutons pour les catégories */
-        button.category-btn {
-        padding: 10px 20px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        cursor: pointer;
-        }   
-    </style>
 </head>
 <body>
 <!-- En-tête -->
@@ -86,19 +61,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search'])) {
         </div>
 
 
-    <!-- Affichage du Résultat de la recherche -->
-     <?php if (!empty($products)) :?>
-        <h2>Résultat de la recherche pour "<?= htmlspecialchars($search)?>"</h2>
-    <?php endif;?>
+     <!-- Affichage du Résultat de la recherche -->
+        <?php if (!empty($products) && isset($search)) : ?>
+            <h2>Résultat de la recherche pour "<?= htmlspecialchars($search) ?>"</h2>
+        <?php endif; ?>
+
 
     <!-- <div class="filling"></div> -->
         
-    <!-- <select class="category-dropdown" name="category_id">
+    <select class="category-dropdown" name="category_id">
                 <option value="">Tous les produits</option>
                 <?php foreach ($categories as $category) :?>
                     <option value="<?php echo htmlspecialchars($category['id'])?>"><?php echo htmlspecialchars($category['name'])?></option>
                 <?php endforeach;?>
-    </select> -->
+    </select>
     <!-- Section pour afficher les grid de filtre de cathégorie d'aliment -->
      <?php 
         //Vérification si la table categorie n'est pas vide avant d'afficher

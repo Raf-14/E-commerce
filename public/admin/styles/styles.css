@@ -1,0 +1,597 @@
+/* style global for admin page */
+
+/* reset css */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  /* root */
+  :root {
+    /* color */
+    --primary-color: #4CAF50;
+    --secondary-color: #f44336;
+    --success-color: #4CAF50;
+    --warning-color: #ff9800;
+    --danger-color: #f44336;
+    --info-color: #2196F3;
+    --light-blue: #007bff;
+    --dark-blue: #003a8c;
+    --white: white;
+    --light-gray: #f2f2f2;
+    --tertiary-color: #f1f1f1;
+    --button-color: #fff;
+    --dark-gray: #333;
+    /* size */
+    --small-size: 12px;
+    --button-font-size: 14px;
+    --medium-size: 16px;
+    --large-size: 20px;
+    --heading-size: 24px;
+    --border-radius: 5px;
+    --border-circle: 50%;
+    --border-color: #ddd;
+    /* font-familly */
+    --Arial: Arial, sans-serif;
+    --font-family: 'Poppins', sans-serif;
+
+    /* weight */
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
+
+    /* shadow */
+    --box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+ 
+  }
+  
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--light-gray);
+    color: var(--dark-gray);
+  }
+
+/* Style pour le header */
+
+header {
+    background-color: #4CAF50;
+    color: var(--white);
+    padding: 20px;
+    text-align: center;
+  }
+  .top-products ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .top-products li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .top-products li:last-child {
+    border-bottom: none;
+  }
+  
+  .summary p {
+    font-size: 1.2em;
+    margin: 10px 0;
+  }
+  
+
+  /* Style pour l'aside */
+  aside {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 100vh;
+    background-color: var(--button-color);
+    color: var(--dark-gray);
+    transition: width 0.3s ease-in-out;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  aside:hover {
+    width: 200px;
+    background-color: var(--tertiary-color);
+    color: var(--dark-gray);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  aside h2 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  aside:hover h2 {
+    opacity: 1;
+  }
+  
+  aside ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  
+  aside ul li {
+    padding: 15px 10px;
+    border-bottom: 1px solid #666;
+    width: 100%;
+    text-align: left;
+  }
+  
+  aside ul li a {
+    color: var(--dark-gray);
+    font-size: 1.2rem;
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-bold);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease-in-out;
+    padding: 10px 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  aside ul li a i {
+    margin-right: 10px;
+    color: var(--dark-gray);
+    font-size: 1.5rem;
+  }
+  
+  aside ul li a:hover {
+    background-color: var(--dark-blue);
+    color: var(--white);
+    border-radius: var(--border-radius);
+  }
+  
+
+  /* section modal */
+  .section-modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  
+  .section-modal .modal-content .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .section-modal .modal-content .modal-header button {
+    color: var(--dark-gray);
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    display: block;
+    width: 50px;
+    height: 30px;
+    align-items: center;
+    border-radius: var(--border-radius);
+    border: none;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .section-modal .modal-content .modal-header button:hover {
+    background-color: #f44336;
+    color: var(--white);
+    border-radius: var(--border-radius);
+  }
+  
+  .section-modal .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 100%;
+    max-width: 500px;
+    border-radius: var(--border-radius);
+  }
+  
+  #modal .modal-content h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  #modal .modal-content .modal-body form {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+
+  }
+  
+  .section-modal .modal-content .modal-body form input[type="text"],
+  .section-modal .modal-content .modal-body form input[type="file"],
+  .section-modal .modal-content .modal-body form input[type="number"],
+  .section-modal .modal-content .modal-body form select,
+  .section-modal .modal-content .modal-body form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    margin-bottom: 10px;
+    font-size: var(--medium-size);
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  .section-modal .modal-content .modal-body form input[type="text"]:focus,
+  #modal .modal-content .modal-body form input[type="file"]:focus,
+  .section-modal .modal-content .modal-body form input[type="number"]:focus,
+  .section-modal .modal-content .modal-body form select:focus,
+  .section-modal .modal-content .modal-body form textarea:focus {
+    border-color: var(--primary-color);
+  }
+  
+  .section-modal .modal-content .modal-body form button {
+    width: 100%;
+    padding: 10px;
+    border-radius: var(--border-radius);
+    background-color: var(--success-color);
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+    font-size: var(--medium-size);
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .section-modal .modal-content .modal-body form button:hover {
+    background-color: rgba(15, 209, 15, 0.747);
+    color: var(--white);
+    border-radius: var(--border-radius);
+  }
+
+/* section of product page */
+
+section {
+    margin-left: 200px;
+    padding: 20px;
+    background-color: var(--white);
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+    width: calc(100% - 200px);
+    /* min-height: 80vh; */
+    margin: 0 auto;
+  }
+  
+  section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  main .first-section {
+    margin-top: 50px;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  main .first-section .search-bar {
+    width: 500px;
+    padding: 10px;
+    border-radius: var(--border-radius);
+    font-size: var(--medium-size);
+  }
+
+  main .first-section .search-bar input[type="text"] {
+    width: 400px;
+    padding: 10px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    background-color: var(--light-gray);
+    font-size: var(--medium-size);
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  main .first-section .search-bar input[type="text"]:focus,
+  main .first-section .search-bar input[type="text"]:active {
+    border-color: var(--primary-color);
+    color: var(--white);
+    background-color: var(--tertiary-color);
+  }
+  main .first-section .search-bar button {
+    width: 50px;
+    padding: 10px;
+    border: none;
+    border-radius: var(--border-radius);
+    background-color: var(--info-color);
+    color: var(--white);
+    font-size: var(--medium-size);
+    transition: background-color 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  
+  main .first-section .search-bar button:hover {
+    background-color: var(--dark-blue);
+    color: var(--white);
+  }
+  main .first-section .profile {
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    overflow: hidden;
+    background-color: var(--tertiary-color);
+    padding: 10px;
+    border-radius: var(--border-radius);
+  }
+  
+  main .first-section img {
+    width: 50px;
+    height: 50px;
+    border-radius: var(--border-circle);
+  }
+
+  main .second-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  main .second-section .barre-container {
+    width: 500px;
+    padding: 10px;
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  main .second-section .barre-container select {
+    width: 150px;
+    height: 50px;
+    border-radius: var(--border-radius);
+  }
+  
+  main .second-section .barre-container select option {
+    font-size: var(--medium-size);
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-normal);
+  }
+  main .second-section .barre-container select option:hover {
+    background-color: var(--dark-blue);
+    color: var(--white);
+  }
+  main .second-section .add-product-btn i {
+    color: var(--white);
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  main .second-section .add-product-btn button {
+    width: 200px;
+    height: 50px;
+    padding: 10px;
+    border: none;
+    border-radius: var(--border-radius);
+    background-color: var(--info-color);
+    color: var(--white);
+    font-size: var(--medium-size);
+    transition: background-color 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  
+  main .second-section .add-product-btn button:hover {
+    background-color: var(--dark-blue);
+    color: var(--white);
+  }
+ 
+
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #007bff;
+    color: white;
+    text-transform: uppercase;
+    border-radius: var(--border-radius);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--medium-size);
+    font-family: var(--font-family);
+    height: 50px;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table tbody tr td a {
+    color: var(--dark-gray);
+    text-decoration: none;
+    font-size: var(--medium-size);
+    margin: 0 auto;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+.pagination button {
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+.pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* section of orders page */
+ /* Style pour la section du tableau des commandes */
+ .orders-story {
+    margin-bottom: 20px;
+    }
+    
+    /* Style pour les colonnes du tableau des commandes */
+   .orders-story table {
+    width: 100%;
+    border-collapse: collapse;
+    }
+
+    /* Style pour les cellules du tableau des commandes */
+    .orders-story tr:hover {
+    background-color: #f5f5f5;
+    }
+    .orders-story th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    }
+    
+    /* Style pour le header du tableau des commandes */
+    .orders-story  th {
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+    }
+    
+    /* Style pour le lien pour voir plus dans la colonne du status */
+    .orders-story td.status a {
+    color: #007BFF;
+    text-decoration: none;
+    }
+    
+    /* Style pour le lien pour voir plus dans la colonne du lien pour voir plus */
+    .orders-story td.link a {
+    color: #007BFF;
+    text-decoration: none;
+    }
+    
+    /* Style pour la section du lien pour voir plus */
+    .link {
+    display: block;
+    text-decoration: none;
+    color: #007BFF;
+    font-size: 1.2em;
+    margin-top: 20px;
+    text-align: center;
+    }
+    
+    /* Style pour la section des clients*/
+    main .clients-table {
+        margin: 0 auto;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    main .clients-table table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    main .clients-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    
+    main .clients-table th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    main .clients-table th {
+        background-color: #007BFF;
+        color: white;
+        border-radius: 5px;
+    }
+    
+    main .contact-client form {
+        margin-bottom: 20px;
+        width: 50%;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: var(--border-radius);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    main .contact-client form input[type="text"],
+    main .contact-client form input[type="email"],
+    main .contact-client form textarea {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: var(--border-radius);
+        margin-bottom: 10px;
+    }
+    
+    main .contact-client form input[type="text"]:focus,
+    main .contact-client form input[type="email"]:focus,
+    main .contact-client form textarea:focus {
+        outline: none;
+        border: 1px solid var(--dark-blue);
+    }
+    
+    main .contact-client form input[type="submit"] {
+        width: 200px;
+        height: 50px;
+        padding: 10px;
+        border: none;
+        border-radius: var(--border-radius);
+        background-color: var(--info-color);
+        color: var(--white);
+        font-size: var(--medium-size);
+        transition: background-color 0.3s ease-in-out;
+        cursor: pointer;
+    }
+    
+    main .contact-client form input[type="submit"]:hover {
+        background-color: var(--dark-blue);
+        color: var(--white);
+    }
+    
+    main .contact-client form .success-message {
+        color: var(--success-color);
+        font-size: var(--medium-size);
+        margin-top: 10px;
+        display: none;
+    }
+    
+    main .contact-client form .error-message {
+        color: var(--error-color);
+        font-size: var(--medium-size);
+        margin-top: 10px;
+        display: none;
+    }

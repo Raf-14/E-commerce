@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
         fetch(`./get_cart.php?user_id=${userId}`)
             .then(response => response.json())
             .then(data => {
-                console.log(data); // Vérifie les données renvoyées
+                // console.log(data); // Vérifie les données renvoyées
                 const cartContainer = document.querySelector('.cart'); // Div où afficher le panier
 
                 if (data.success === false) {

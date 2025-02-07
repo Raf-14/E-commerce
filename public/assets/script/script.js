@@ -42,10 +42,10 @@ const addToCart = () => {
         return response.text();
     })
     .then(text => {
-        console.log('Réponse brute :', text);
+        // console.log('Réponse brute :', text);
         const data = JSON.parse(text);
         if (data.success) {
-            console.log(data.message);
+            // console.log(data.message);
 
             // Récupérer le panier du Local Storage
             let cart = JSON.parse(localStorage.getItem('cart')) || [];

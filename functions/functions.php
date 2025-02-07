@@ -162,28 +162,18 @@ function removeFromCard($userId, $productId){
     return $stmt->rowCount(); // Retourne le nombre de lignes supprimées
 }
 
+
+// Fonction de nettoyage des données utilisateu
 // Fonction de nettoyage des données utilisateur
 function cleanUserData($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
+    return htmlspecialchars(stripslashes(trim($data)));
 }
 
 function addUser() {
-    // Connexion à la bdd
-    try {
-        $bdd = new PDO("mysql:host=localhost;dbname=e_commerce1", "root", "");
-        $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $bdd->exec("SET CHARACTER SET utf8");
-    } catch (PDOException $e) {
-        throw new PDOException($e->getMessage());
-        exit();
-    }
+    global $bdd;
     $errors = [];
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Récupération des données nettoyées
         $username = cleanUserData($_POST['username'] ?? '');
         $last_name = cleanUserData($_POST['last_name'] ?? '');
         $email = cleanUserData($_POST['email'] ?? '');
@@ -192,81 +182,48 @@ function addUser() {
         $phone = cleanUserData($_POST['phone'] ?? '');
         $address = cleanUserData($_POST['address'] ?? '');
         $secret_code = cleanUserData($_POST['secret_code'] ?? '');
-        $role = 'customer'; // Rôle par défaut
+        $role = 'customer';
 
-        // Vérification des champs obligatoires
-        if (empty($username)) {
-            $errors[] = "Le nom d'utilisateur est obligatoire.";
-        }
-        if (empty($last_name)) {
-            $errors[] = "Le nom est obligatoire.";
-        }
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors[] = "L'email n'est pas valide.";
-        }
-        if (strlen($password) < 10) {
-            $errors[] = "Le mot de passe doit contenir au moins 10 caractères.";
-        }
-        if (empty($confirm_password)) {
-            $errors[] = "Le mot de passe de confirmation est obligatoire.";
-        }
-        if ($password !== $confirm_password) {
-            $errors[] = "Les mots de passe ne correspondent pas.";
-        }
-        if (empty($phone)) {
-            $errors[] = "Le numéro de téléphone est obligatoire.";
-        }
-        if (empty($address)) {
-            $errors[] = "L'adresse est obligatoire.";
-        }
-        // if (empty($secret_code)) {
-        //     $errors[] = "Le code secret est obligatoire.";
-        // }
+        // Vérifications des champs obligatoires
+        if (empty($username)) $errors[] = "Le nom d'utilisateur est obligatoire.";
+        if (empty($last_name)) $errors[] = "Le nom est obligatoire.";
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = "L'email n'est pas valide.";
+        if (empty($password)) $errors[] = "Le mot de passe est obligatoire.";
+        if (strlen($password) < 10) $errors[] = "Le mot de passe doit contenir au moins 10 caractères.";
+        if (empty($confirm_password)) $errors[] = "Le mot de passe de confirmation est obligatoire.";
+        if ($password !== $confirm_password) $errors[] = "Les mots de passe ne correspondent pas.";
+        if (empty($phone)) $errors[] = "Le numéro de téléphone est obligatoire.";
+        if (empty($address)) $errors[] = "L'adresse est obligatoire.";
 
-        // Vérification des caractères spéciaux dans le nom d'utilisateur
-        if (!preg_match("/^[a-zA-Z0-9_-]+$/", $username)) {
-            $errors[] = "Le nom d'utilisateur ne peut contenir que des lettres, chiffres, underscores et tirets.";
-        }
-        // Vérification des caractères spéciaux dans le nom
-        if (!preg_match("/^[a-zA-Z ]+$/", $last_name)) {
-            $errors[] = "Le nom ne peut contenir que des lettres et des espaces.";
-        }
-        // Vérification de l'adresse
-        if (!preg_match("/^[a-zA-Z0-9, -]+$/", $address)) {
-            $errors[] = "L'adresse ne peut contenir que des lettres, chiffres, virgules, tirets et espaces.";
-        }
-        // Vérification du code secret
-        // if ($secret_code!== "admin_code") {
-        //     $errors[] = "Le code secret est incorrect.";
-        // }
+        // Vérification des formats
+        if (!preg_match("/^[a-zA-Z0-9_-]+$/", $username)) $errors[] = "Le nom d'utilisateur ne peut contenir que des lettres, chiffres, underscores et tirets.";
+        if (!preg_match("/^[a-zA-Z ]+$/", $last_name)) $errors[] = "Le nom ne peut contenir que des lettres et des espaces.";
+        if (!preg_match("/^[0-9]{10,15}$/", $phone)) $errors[] = "Le numéro de téléphone doit contenir uniquement des chiffres et être valide.";
+        if (!preg_match("/^[a-zA-Z0-9, -]+$/", $address)) $errors[] = "L'adresse ne peut contenir que des lettres, chiffres, virgules, tirets et espaces.";
 
-        // Vérification si l'email existe déjà dans la base de données
+        // Vérification de l'existence de l'email
         $checkEmailStmt = $bdd->prepare("SELECT id FROM users WHERE email = :email");
         $checkEmailStmt->execute([':email' => $email]);
-        if ($checkEmailStmt->rowCount() > 0) {
-            $errors[] = "L'email est déjà utilisé.";
-        }
+        if ($checkEmailStmt->rowCount() > 0) $errors[] = "L'email est déjà utilisé.";
 
-        // Vérification du code secret pour attribuer le rôle 'admin'
+        // Définir le rôle de l'utilisateur si secret_code correct
         if ($secret_code === "admin_code") {
-            $role = 'admin'; // Si le code secret est correct, l'utilisateur devient admin
+            $role = 'admin';
         }
 
-        // Si des erreurs existent, les stocker en session et rediriger
-        if (!empty($errors)) {
-            $_SESSION['errors'] = $errors;
-            header("Location: register.php"); // Retourner à la page du formulaire
-            exit();
-        }
+        // Si des erreurs existent, rediriger avec les erreurs
+        // if (!empty($errors)) {
+        //     $_SESSION['errors'] = $errors;
+        //     header("Location: register.php");
+        //     exit();
+        // }
 
-        // Si aucune erreur, procéder à l'insertion
         try {
-            // Hashage du mot de passe
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-            $stmt = $bdd->prepare(
-                "INSERT INTO users (username, last_name, email, password, phone, address, role) 
-                VALUES (:username, :last_name, :email, :password, :phone, :address, :role)"
-            );
+
+            // Insertion de l'utilisateur
+            $stmt = $bdd->prepare("INSERT INTO users (username, last_name, email, password, phone, address, role) 
+                                   VALUES (:username, :last_name, :email, :password, :phone, :address, :role)");
             $stmt->execute([
                 ':username' => $username,
                 ':last_name' => $last_name,
@@ -276,34 +233,26 @@ function addUser() {
                 ':address' => $address,
                 ':role' => $role
             ]);
-            echo json_encode(['message' => "Votre compte a été créé avec succès! Vous pouvez vous connecter maintenant."]);
 
-            // Définir les variables de session
+            // Stocker les informations de session
             $_SESSION['logged_in'] = true;
             $_SESSION['user_id'] = $bdd->lastInsertId();
             $_SESSION['user_role'] = $role;
-            
-            // Redirection selon le rôle de l'utilisateur
+
+            // Redirection après inscription
             if ($role === 'admin') {
                 header('Location: admin_dashboard.php');
             } else {
-                header('Location: profile.php');
+                header('Location: ../public/profile.php');
             }
             exit();
         } catch (PDOException $e) {
-            $errors[] = "Erreur lors de la création de votre compte. Veuillez réessayer plus tard.";
-        }
-
-        // Si des erreurs existent, les renvoyer sous forme de JSON
-        if (!empty($errors)) {
-            echo json_encode($errors);
+            $_SESSION['errors'][] = "Erreur lors de la création du compte : " . $e->getMessage();
+            header("Location: register.php");
+            exit();
         }
     }
 }
-
-// Appelle de la fonction pour ajouter un nouveau user
-addUser();
-
 
 // Fonction pour se loger
 
@@ -385,9 +334,6 @@ function loginUser() {
     //     exit;
     // }
 }
-
-    
-
 
 //Fonction qui vérifie si un utilisateur est connecté
 

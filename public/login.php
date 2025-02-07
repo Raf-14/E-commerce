@@ -120,7 +120,6 @@ loginUser();
         errorMessages.innerHTML = "";
     }
     // Fonction pour masquer le message d'erreur lors de la connexion
-    // Fonction pour masquer le message d'erreur lors de la connexion
     function hideError() {
         document.querySelector('.error').style.display = "none";
     }
